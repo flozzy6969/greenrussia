@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Green Russia — Криминальная RPG | Форум и APK</title>
-    <!-- Font Awesome 6 (free) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Google Fonts: Brutal & Modern -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <style>
         * {
@@ -22,7 +20,6 @@
             line-height: 1.4;
         }
 
-        /* эффект зернистости и текстуры */
         body::before {
             content: "";
             position: fixed;
@@ -44,7 +41,6 @@
             padding: 1.5rem 2rem 3rem;
         }
 
-        /* хедер с медведем */
         .hero {
             display: flex;
             flex-wrap: wrap;
@@ -102,7 +98,6 @@
             margin-right: 8px;
         }
 
-        /* карточки стиля "Black Russia" но в зелёном ключе */
         .card-grid {
             display: flex;
             flex-wrap: wrap;
@@ -141,7 +136,6 @@
             font-weight: 400;
         }
 
-        /* APK блок - главная фишка */
         .apk-section {
             background: linear-gradient(125deg, #0f2a0b, #071a05);
             border-radius: 48px;
@@ -199,149 +193,32 @@
             transform: scale(1.02);
             box-shadow: 0 0 15px #6fbf4c;
         }
-        .apk-meta {
-            margin-top: 15px;
-            font-size: 0.75rem;
-            color: #b5d4a2;
-        }
-
-        /* ФОРУМНАЯ ЧАСТЬ */
-        .forum-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap;
-            margin: 2rem 0 1rem 0;
-            border-left: 4px solid #6fbf4c;
-            padding-left: 1rem;
-        }
-        .forum-header h2 {
-            font-size: 1.9rem;
-            font-weight: 700;
-        }
-        .new-topic-btn {
-            background: rgba(111,191,76,0.2);
-            border: 1px solid #6fbf4c;
-            padding: 0.5rem 1.2rem;
-            border-radius: 40px;
-            font-weight: 600;
-            transition: 0.2s;
-            cursor: pointer;
-        }
-        .new-topic-btn:hover {
-            background: #6fbf4c;
-            color: #030a05;
-        }
-
-        .forum-table {
-            background: rgba(0, 0, 0, 0.55);
-            backdrop-filter: blur(4px);
-            border-radius: 28px;
-            overflow: hidden;
-            border: 1px solid #2b4623;
-            margin-bottom: 2rem;
-        }
-        .forum-row {
-            display: grid;
-            grid-template-columns: 3fr 1fr 1.2fr;
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid #2a4620;
-            align-items: center;
-            transition: 0.1s;
-        }
-        .forum-row.header {
-            background: #10260c;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #bbf0a2;
-        }
-        .forum-row:not(.header):hover {
-            background: #1b3216;
-        }
-        .topic-title {
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .topic-title i {
-            color: #6fbf4c;
-            font-size: 1.2rem;
-        }
-        .topic-meta {
-            color: #b2d49b;
-            font-size: 0.8rem;
-        }
-        .author {
-            font-weight: 500;
-        }
-        .replies {
+        
+        /* ДОНАТ КНОПКА */
+        .donate-section {
+            margin: 2rem 0;
             text-align: center;
         }
-        .green-tag {
-            background: #2f6b1f;
-            padding: 0.2rem 0.8rem;
-            border-radius: 30px;
-            font-size: 0.7rem;
-            font-weight: 700;
-        }
-
-        /* модальное окно для новых тем */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(10px);
-            z-index: 999;
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-content {
-            background: #121f0e;
-            border-radius: 36px;
-            padding: 2rem;
-            width: 90%;
-            max-width: 500px;
-            border: 1px solid #6fbf4c;
-            box-shadow: 0 25px 40px black;
-        }
-        .modal-content input, .modal-content textarea {
-            width: 100%;
-            background: #1b2b16;
-            border: 1px solid #437a2c;
-            padding: 12px;
-            border-radius: 28px;
-            color: white;
-            margin: 12px 0;
-            font-family: inherit;
-        }
-        .modal-buttons {
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-            margin-top: 20px;
-        }
-        .modal-buttons button {
-            padding: 8px 20px;
-            border-radius: 40px;
+        .btn-donate {
+            background: linear-gradient(135deg, #ff9800, #ff5722);
             border: none;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        #submitTopic {
-            background: #6fbf4c;
-            color: #0f1a0b;
-        }
-        .close-modal {
-            background: #3a2c2c;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            font-weight: 800;
+            border-radius: 60px;
             color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.2s;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        .btn-donate:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 15px #ff9800;
         }
 
-        /* инструкция 3 шага */
         .steps {
             background: rgba(0,0,0,0.4);
             border-radius: 32px;
@@ -382,24 +259,17 @@
 
         @media (max-width: 720px) {
             .wrapper { padding: 1rem; }
-            .forum-row { grid-template-columns: 1fr; gap: 8px; padding: 1rem; }
-            .forum-row.header { display: none; }
             .apk-section { flex-direction: column; text-align: center; gap: 20px; }
             .hero { flex-direction: column; gap: 20px; text-align: center; }
         }
-        i.fa, i.far, i.fas { pointer-events: none; }
-        button { background: none; border: none; color: inherit; cursor: pointer; }
-        a { color: #b9f598; text-decoration: none; }
     </style>
 </head>
 <body>
 <div class="wrapper">
-    <!-- Hero с медведем -->
     <div class="hero">
         <div class="logo-area">
             <div class="bear-icon">
                 🐻‍❄️🐻
-                <!-- медведь двойной символ силы -->
                 <i class="fas fa-paw" style="font-size: 2rem; margin-left: -10px; color:#6fbf4c;"></i>
             </div>
             <div class="title">
@@ -412,7 +282,6 @@
         </div>
     </div>
 
-    <!-- Ключевые карточки (пример вайба Black Russia) -->
     <div class="card-grid">
         <div class="card">
             <i class="fas fa-hand-fist"></i>
@@ -431,7 +300,6 @@
         </div>
     </div>
 
-    <!-- Блок загрузки APK самый важный -->
     <div class="apk-section" id="apkBlock">
         <div class="apk-info">
             <h2><i class="fab fa-android"></i> GREEN RUSSIA APK <span class="apk-badge">Версия 3.2.0 | 78 MB</span></h2>
@@ -444,135 +312,41 @@
         </div>
     </div>
 
-    <!-- Визуализация шагов 1-2-3 как на примере -->
+    <!-- БЛОК ДОНАТА -->
+    <div class="donate-section">
+        <button class="btn-donate" id="donateBtn">
+            <i class="fas fa-heart"></i> Поддержать проект Green Russia
+        </button>
+        <p style="font-size:0.8rem; margin-top:8px;">Любая сумма помогает серверу жить и развиваться 💚</p>
+    </div>
+
     <div class="steps">
         <div class="step"><div class="step-number">1</div> <strong>Скачай игру</strong><br>любым удобным способом (APK выше)</div>
         <div class="step"><div class="step-number">2</div> <strong>Введи игровой никнейм</strong><br>твой путь начинается в Green Russia</div>
         <div class="step"><div class="step-number">3</div> <strong>Нажми «Играть»</strong><br>и становись хозяином улиц</div>
     </div>
 
-    <!-- ФОРУМ (обсуждения, темы, комьюнити) -->
-    <div class="forum-header">
-        <h2><i class="fas fa-comments"></i> Форум сообщества «Зелёный медведь»</h2>
-        <button class="new-topic-btn" id="newTopicBtn"><i class="fas fa-plus-circle"></i> Создать тему</button>
-    </div>
-
-    <div class="forum-table" id="forumContainer">
-        <div class="forum-row header">
-            <div>Темы</div>
-            <div>Автор</div>
-            <div>Ответы</div>
-        </div>
-        <!-- Динамические темы будут загружены сюда через JS -->
-        <div id="forumTopicsList">
-            <!-- пример начальных тем, чтобы форум не был пуст -->
-        </div>
-    </div>
     <footer>
-        <p>Green Russia — официальный сайт/форум клана. Все права защищены. Медведь — символ мощи и справедливости. <br> blackrussia.online style but stronger & greener | Играй вместе с нами</p>
+        <p>Green Russia — официальный сайт/форум клана. Все права защищены. Медведь — символ мощи и справедливости. <br> Играй вместе с нами | Поддержи проект через Озон Банк (СБП)</p>
     </footer>
 </div>
 
-<!-- Модальное окно для создания темы -->
-<div id="topicModal" class="modal">
-    <div class="modal-content">
-        <h3><i class="fas fa-pen-fancy"></i> Новая тема на форуме</h3>
-        <input type="text" id="topicTitle" placeholder="Заголовок темы (напр.: Как захватить лесопилку?)">
-        <textarea rows="3" id="topicDesc" placeholder="Опиши суть..."></textarea>
-        <input type="text" id="topicAuthor" placeholder="Твой никнейм" value="Медвежий_воин">
-        <div class="modal-buttons">
-            <button class="close-modal" id="closeModalBtn">Отмена</button>
-            <button id="submitTopic">Опубликовать</button>
-        </div>
-    </div>
-</div>
-
 <script>
-    // --- Функционал форума с локальным хранилищем ---
-    let forumTopics = [];
-
-    // Загрузка сохраненных тем из localStorage
-    function loadTopicsFromStorage() {
-        const stored = localStorage.getItem('greenRussia_forum_topics');
-        if(stored) {
-            forumTopics = JSON.parse(stored);
-        } else {
-            // демо-темы по умолчанию (с атмосферой)
-            forumTopics = [
-                { id: 1, title: "🐻 Как стать лидером лесного братства?", author: "Тайный_босс", replies: 14, date: "2 дня назад" },
-                { id: 2, title: "Гайд: прокачка репутации и захват районов", author: "Зелёный_хищник", replies: 32, date: "5 дней назад" },
-                { id: 3, title: "Где найти редкий скин «Белый медведь»?", author: "Кедр_88", replies: 7, date: "вчера" },
-                { id: 4, title: "Война кланов: объявляем набор в Семью", author: "Ataman_Grizzly", replies: 56, date: "3 часа назад" }
-            ];
-        }
-        renderForum();
-    }
-
-    function saveTopicsToStorage() {
-        localStorage.setItem('greenRussia_forum_topics', JSON.stringify(forumTopics));
-    }
-
-    function renderForum() {
-        const container = document.getElementById('forumTopicsList');
-        if(!container) return;
-        if(forumTopics.length === 0) {
-            container.innerHTML = `<div class="forum-row" style="justify-content:center; text-align:center; padding:2rem;">Пока нет тем, создай первую и начни обсуждение! <i class="fas fa-paw"></i></div>`;
-            return;
-        }
-        let html = '';
-        forumTopics.forEach(topic => {
-            html += `
-                <div class="forum-row">
-                    <div class="topic-title">
-                        <i class="fas fa-comment-dots"></i> 
-                        <span><strong>${escapeHtml(topic.title)}</strong><br><span class="topic-meta">📅 ${topic.date || 'сегодня'}</span></span>
-                    </div>
-                    <div class="author"><i class="fas fa-user-astronaut"></i> ${escapeHtml(topic.author)}</div>
-                    <div class="replies"><span class="green-tag"><i class="fas fa-reply-all"></i> ${topic.replies}</span></div>
-                </div>
-            `;
-        });
-        container.innerHTML = html;
-    }
-
-    function escapeHtml(str) {
-        if(!str) return '';
-        return str.replace(/[&<>]/g, function(m) {
-            if(m === '&') return '&amp;';
-            if(m === '<') return '&lt;';
-            if(m === '>') return '&gt;';
-            return m;
-        }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
-            return c;
+    // ДОНАТ ССЫЛКА (твоя)
+    const donateBtn = document.getElementById('donateBtn');
+    if(donateBtn) {
+        donateBtn.addEventListener('click', () => {
+            window.open('https://finance.ozon.ru/apps/sbp/ozonbankpay/019bfe74-6fa5-7117-8665-deae385c367f', '_blank');
         });
     }
 
-    function addNewTopic(title, author, contentPreview) {
-        if(!title.trim()) {
-            alert("Введите заголовок темы");
-            return false;
-        }
-        if(!author.trim()) author = "Медвежий_странник";
-        const newId = Date.now();
-        const nowDate = new Date().toLocaleDateString('ru-RU');
-        // доп поле description не обязательно для отображения, но оставим для полноты
-        const newTopic = {
-            id: newId,
-            title: title.trim(),
-            author: author.trim().substring(0, 24),
-            replies: 0,
-            date: `сегодня в ${new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}`,
-            content: contentPreview || ''
-        };
-        forumTopics.unshift(newTopic); // свежие темы сверху
-        saveTopicsToStorage();
-        renderForum();
-        return true;
-    }
-
-    // APK скачивание (имитация ссылки на APK файл)
+    // СКАЧИВАНИЕ APK
     const downloadBtn = document.getElementById('downloadApkBtn');
     if(downloadBtn) {
         downloadBtn.addEventListener('click', (e) => {
-            // создаем ссылку на "файл" .apk - демо-файл для скачивания, в реальности подставить реальный url.
-            // Так как по заданию требуется возможность "вставить апк и скачивать этот апк", создадим блоб с тест
+            window.location.href = 'GreenRussia.apk';
+        });
+    }
+</script>
+</body>
+</html>
