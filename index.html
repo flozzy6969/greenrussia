@@ -44,6 +44,9 @@
         .promo-item{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #2c5a1f;}
         .green-text{color:#6fbf4c;font-weight:bold;}
         .footer{text-align:center;margin-top:40px;padding:20px;border-top:1px solid #2c4b21;}
+        .instruction-step{background:#1a2a16;padding:15px;border-radius:24px;margin:15px 0;}
+        .instruction-step i{font-size:24px;margin-right:12px;color:#6fbf4c;}
+        code{background:#0a1a08;padding:4px 10px;border-radius:20px;font-family:monospace;}
         @media (max-width:720px){.hero{flex-direction:column;text-align:center;}.promo-input{width:90%;}}
     </style>
 </head>
@@ -55,41 +58,14 @@
     <ul class="sidebar-menu">
         <li><a href="#" id="navHome"><i class="fas fa-home"></i> Главная</a></li>
         <li><a href="#" id="navPromo"><i class="fas fa-ticket-alt"></i> Промокоды</a></li>
+        <li><a href="#" id="navIphone"><i class="fab fa-apple"></i> Информация для iPhone</a></li>
+        <li><a href="#" id="navPc"><i class="fas fa-laptop-code"></i> Информация для ПК</a></li>
     </ul>
     <hr style="margin:30px 0;">
     <div style="text-align:center;">Сервер <strong>Moscow</strong><br>🐻 Green Russia</div>
 </div>
 
-<div class="wrapper" id="app">
-    <!-- Главная страница -->
-    <div id="homePage">
-        <div class="hero">
-            <div><div class="bear-icon">🐻‍❄️🐻</div><div class="title"><h1>GREEN RUSSIA</h1><p>Ролевая игра на сервере Moscow</p></div></div>
-        </div>
-
-        <div class="card">
-            <h2><i class="fas fa-download"></i> Скачать игру</h2>
-            <a href="https://disk.yandex.ru/d/2lTyrQzPeNO03Q" target="_blank"><button class="btn"><i class="fab fa-android"></i> GreenRussia.apk (32 МБ)</button></a>
-        </div>
-
-        <div class="card">
-            <h2><i class="fab fa-apple"></i> Инструкция для iPhone</h2>
-            <p><strong>1.</strong> Скачай в App Store приложение <strong>iSH Shell</strong> (бесплатно).</p>
-            <p><strong>2.</strong> Открой iSH Shell, введи команду: <code style="background:#1a2a16;padding:4px 8px;border-radius:12px;">apk add wget</code></p>
-            <p><strong>3.</strong> Затем скачай APK: <code style="background:#1a2a16;padding:4px 8px;border-radius:12px;">wget https://disk.yandex.ru/d/2lTyrQzPeNO03Q</code> (или прямую ссылку с Яндекс.Диска)</p>
-            <p><strong>4.</strong> Установи: <code style="background:#1a2a16;padding:4px 8px;border-radius:12px;">apk add ./GreenRussia.apk</code></p>
-            <p><strong>5.</strong> Готово! Игра появится в меню iPhone.</p>
-            <p style="margin-top:10px;"><strong>🖥️ Для компьютера:</strong> скачай <strong>Bluestacks</strong> (бесплатно) → внутри Bluestacks браузер → зайди на сайт → скачай APK → установи.</p>
-        </div>
-
-        <div class="card">
-            <h2><i class="fas fa-heart"></i> Поддержать проект</h2>
-            <a href="https://finance.ozon.ru/apps/sbp/ozonbankpay/019bfe74-6fa5-7117-8665-deae385c367f" target="_blank"><button class="btn btn-donate"><i class="fas fa-heart"></i> Озон Банк (анонимно)</button></a>
-        </div>
-
-        <div class="footer">Green Russia — официальный сайт | По всем вопросам: @wflossy</div>
-    </div>
-</div>
+<div class="wrapper" id="app"></div>
 
 <script>
     // Промокоды
@@ -99,6 +75,49 @@
         "TOP25": "50.000.000"
     };
     let usedCodes = JSON.parse(localStorage.getItem("gr_used_promocodes")) || [];
+
+    function showMessage(text, isError = false) {
+        const msgDiv = document.getElementById("promoMessage");
+        if (!msgDiv) return;
+        msgDiv.innerHTML = text;
+        msgDiv.style.backgroundColor = isError ? "#5a1a1a" : "#1a3a1a";
+        msgDiv.style.border = "1px solid " + (isError ? "#ff6666" : "#6fbf4c");
+        setTimeout(() => { if(msgDiv) msgDiv.innerHTML = ""; }, 5000);
+    }
+
+    function activatePromo() {
+        const input = document.getElementById("promoInput");
+        if (!input) return;
+        let code = input.value.trim().toUpperCase();
+        if (!code) { showMessage("❌ Введи промокод!", true); return; }
+        if (usedCodes.includes(code)) { showMessage("❌ Ты уже активировал этот промокод!", true); return; }
+        if (PROMOCODES[code]) {
+            usedCodes.push(code);
+            localStorage.setItem("gr_used_promocodes", JSON.stringify(usedCodes));
+            showMessage(`✅ Промокод ${code} активирован!\nНаграда: ${PROMOCODES[code]}\n\nНапиши @wflossy с ником и кодом "${code}"`);
+            input.value = "";
+        } else {
+            showMessage(`❌ Код "${code}" не найден. Доступны: WELCOME, GREENWEEK, TOP25`, true);
+        }
+    }
+
+    function renderHome() {
+        const app = document.getElementById("app");
+        app.innerHTML = `
+            <div class="hero">
+                <div><div class="bear-icon">🐻‍❄️🐻</div><div class="title"><h1>GREEN RUSSIA</h1><p>Ролевая игра на сервере Moscow</p></div></div>
+            </div>
+            <div class="card">
+                <h2><i class="fas fa-download"></i> Скачать игру</h2>
+                <a href="https://disk.yandex.ru/d/2lTyrQzPeNO03Q" target="_blank"><button class="btn"><i class="fab fa-android"></i> GreenRussia.apk (32 МБ)</button></a>
+            </div>
+            <div class="card">
+                <h2><i class="fas fa-heart"></i> Поддержать проект</h2>
+                <a href="https://finance.ozon.ru/apps/sbp/ozonbankpay/019bfe74-6fa5-7117-8665-deae385c367f" target="_blank"><button class="btn btn-donate"><i class="fas fa-heart"></i> Озон Банк (анонимно)</button></a>
+            </div>
+            <div class="footer">Green Russia — официальный сайт | По всем вопросам: @wflossy</div>
+        `;
+    }
 
     function renderPromoPage() {
         const app = document.getElementById("app");
@@ -124,55 +143,35 @@
         document.getElementById("activatePromoBtn")?.addEventListener("click", activatePromo);
     }
 
-    function activatePromo() {
-        const input = document.getElementById("promoInput");
-        let code = input.value.trim().toUpperCase();
-        if (!code) { showMessage("❌ Введи промокод!", true); return; }
-        if (usedCodes.includes(code)) { showMessage("❌ Ты уже активировал этот промокод!", true); return; }
-        if (PROMOCODES[code]) {
-            usedCodes.push(code);
-            localStorage.setItem("gr_used_promocodes", JSON.stringify(usedCodes));
-            showMessage(`✅ Промокод ${code} активирован!\nНаграда: ${PROMOCODES[code]}\n\nНапиши @wflossy с ником и кодом "${code}"`);
-            input.value = "";
-        } else {
-            showMessage(`❌ Код "${code}" не найден. Доступны: WELCOME, GREENWEEK, TOP25`, true);
-        }
-    }
-
-    function showMessage(text, isError = false) {
-        const msgDiv = document.getElementById("promoMessage");
-        if (!msgDiv) return;
-        msgDiv.innerHTML = text;
-        msgDiv.style.backgroundColor = isError ? "#5a1a1a" : "#1a3a1a";
-        msgDiv.style.border = "1px solid " + (isError ? "#ff6666" : "#6fbf4c");
-        setTimeout(() => { if(msgDiv) msgDiv.innerHTML = ""; }, 5000);
-    }
-
-    function renderHome() {
+    function renderIphone() {
         const app = document.getElementById("app");
         app.innerHTML = `
-            <div id="homePage">
-                <div class="hero">
-                    <div><div class="bear-icon">🐻‍❄️🐻</div><div class="title"><h1>GREEN RUSSIA</h1><p>Ролевая игра на сервере Moscow</p></div></div>
-                </div>
-                <div class="card">
-                    <h2><i class="fas fa-download"></i> Скачать игру</h2>
-                    <a href="https://disk.yandex.ru/d/2lTyrQzPeNO03Q" target="_blank"><button class="btn"><i class="fab fa-android"></i> GreenRussia.apk (32 МБ)</button></a>
-                </div>
-                <div class="card">
-                    <h2><i class="fab fa-apple"></i> Инструкция для iPhone</h2>
-                    <p><strong>1.</strong> Скачай <strong>iSH Shell</strong> в App Store.</p>
-                    <p><strong>2.</strong> Введи: <code>apk add wget</code></p>
-                    <p><strong>3.</strong> Скачай APK: <code>wget https://disk.yandex.ru/d/2lTyrQzPeNO03Q</code></p>
-                    <p><strong>4.</strong> Установи: <code>apk add ./GreenRussia.apk</code></p>
-                    <p><strong>🖥️ Для компьютера:</strong> Bluestacks → внутри браузер → скачай APK → играй.</p>
-                </div>
-                <div class="card">
-                    <h2><i class="fas fa-heart"></i> Поддержать проект</h2>
-                    <a href="https://finance.ozon.ru/apps/sbp/ozonbankpay/019bfe74-6fa5-7117-8665-deae385c367f" target="_blank"><button class="btn btn-donate"><i class="fas fa-heart"></i> Озон Банк (анонимно)</button></a>
-                </div>
-                <div class="footer">Green Russia — официальный сайт | По всем вопросам: @wflossy</div>
+            <div class="card">
+                <h2><i class="fab fa-apple"></i> Как играть на iPhone</h2>
+                <div class="instruction-step"><i class="fas fa-download"></i> <strong>1. Скачай iSH Shell</strong><br>Найди в App Store приложение <code>iSH Shell</code> (бесплатно)</div>
+                <div class="instruction-step"><i class="fas fa-terminal"></i> <strong>2. Открой iSH Shell</strong><br>Введи команду: <code>apk add wget</code> и нажми Enter</div>
+                <div class="instruction-step"><i class="fas fa-cloud-download-alt"></i> <strong>3. Скачай APK</strong><br>Введи: <code>wget https://disk.yandex.ru/d/2lTyrQzPeNO03Q</code></div>
+                <div class="instruction-step"><i class="fas fa-cube"></i> <strong>4. Установи игру</strong><br>Введи: <code>apk add ./GreenRussia.apk</code></div>
+                <div class="instruction-step"><i class="fas fa-gamepad"></i> <strong>5. Играй!</strong><br>Игра появится в меню iPhone</div>
+                <p style="margin-top:15px;"><i class="fas fa-question-circle"></i> Если не получается — напиши @wflossy</p>
             </div>
+            <div class="footer">Green Russia | iPhone инструкция</div>
+        `;
+    }
+
+    function renderPc() {
+        const app = document.getElementById("app");
+        app.innerHTML = `
+            <div class="card">
+                <h2><i class="fas fa-laptop-code"></i> Как играть на компьютере</h2>
+                <div class="instruction-step"><i class="fas fa-download"></i> <strong>1. Скачай Bluestacks</strong><br>Официальный сайт: <a href="https://www.bluestacks.com" target="_blank" style="color:#6fbf4c;">bluestacks.com</a> (бесплатно)</div>
+                <div class="instruction-step"><i class="fas fa-play-circle"></i> <strong>2. Установи и открой Bluestacks</strong><br>Дождись загрузки эмулятора</div>
+                <div class="instruction-step"><i class="fas fa-globe"></i> <strong>3. Зайди на сайт</strong><br>Внутри Bluestacks открой браузер и перейди на <code>flozzy6969.github.io/greenrussia</code></div>
+                <div class="instruction-step"><i class="fas fa-cloud-download-alt"></i> <strong>4. Скачай APK</strong><br>Нажми на кнопку «Скачать APK»</div>
+                <div class="instruction-step"><i class="fas fa-cube"></i> <strong>5. Установи и играй!</strong><br>Нажми на скачанный файл → установить → запустить</div>
+                <p style="margin-top:15px;"><i class="fas fa-question-circle"></i> Если не получается — напиши @wflossy</p>
+            </div>
+            <div class="footer">Green Russia | PC инструкция</div>
         `;
     }
 
@@ -181,6 +180,8 @@
     document.getElementById("closeSidebar").onclick = () => document.getElementById("sidebar").classList.remove("open");
     document.getElementById("navHome").onclick = (e) => { e.preventDefault(); renderHome(); document.getElementById("sidebar").classList.remove("open"); };
     document.getElementById("navPromo").onclick = (e) => { e.preventDefault(); renderPromoPage(); document.getElementById("sidebar").classList.remove("open"); };
+    document.getElementById("navIphone").onclick = (e) => { e.preventDefault(); renderIphone(); document.getElementById("sidebar").classList.remove("open"); };
+    document.getElementById("navPc").onclick = (e) => { e.preventDefault(); renderPc(); document.getElementById("sidebar").classList.remove("open"); };
 
     renderHome();
 </script>
