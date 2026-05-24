@@ -3,231 +3,342 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Green Russia — криминальная RPG | Скачать APK</title>
-    <meta name="description" content="Green Russia — ролевая игра. Качай APK, вступай в семью, захватывай районы.">
+    <title>Green Russia — официальный сайт и форум</title>
+    <meta name="description" content="Green Russia — ролевая игра на сервере Moscow. Форум, регистрация, новости, заявки и жалобы.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             background: radial-gradient(circle at 10% 20%, #0a1f0e, #030a05);
             font-family: 'Inter', sans-serif;
             color: #eef5e9;
             line-height: 1.4;
+            min-height: 100vh;
         }
-        .wrapper {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 1.5rem 2rem 3rem;
-            position: relative;
-            z-index: 2;
+
+        /* Боковое меню (три полоски) */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
+            background: #0a1a08;
+            backdrop-filter: blur(10px);
+            border-right: 1px solid #6fbf4c;
+            z-index: 1000;
+            transition: left 0.3s ease;
+            padding: 20px;
+            box-shadow: 5px 0 25px rgba(0,0,0,0.5);
         }
-        .hero {
+        .sidebar.open {
+            left: 0;
+        }
+        .sidebar-header {
             display: flex;
-            flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 3rem;
-            padding: 1rem 0;
-            border-bottom: 2px solid rgba(80, 180, 80, 0.4);
+            margin-bottom: 30px;
+            border-bottom: 1px solid #2c4b21;
+            padding-bottom: 15px;
         }
-        .logo-area { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-        .bear-icon { font-size: 4.5rem; filter: drop-shadow(0 0 8px #6fbf4c); }
-        .title h1 {
-            font-size: 2.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #c4ff9e, #6fbf4c);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+        .sidebar-header h3 {
+            color: #6fbf4c;
         }
-        .stats-badge {
-            background: rgba(0,0,0,0.65);
-            backdrop-filter: blur(8px);
-            padding: 0.6rem 1.2rem;
-            border-radius: 60px;
-            border-left: 4px solid #6fbf4c;
-        }
-        .card-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-        .card {
-            flex: 1;
-            min-width: 260px;
-            background: rgba(10, 20, 8, 0.75);
-            backdrop-filter: blur(12px);
-            border-radius: 32px;
-            border: 1px solid rgba(111, 191, 76, 0.4);
-            padding: 1.6rem;
-            transition: 0.25s;
-        }
-        .card:hover { border-color: #8bdc6e; transform: translateY(-5px); }
-        .card i { font-size: 2.4rem; color: #8bdc6e; margin-bottom: 1rem; }
-        .card h3 { font-size: 1.7rem; font-weight: 700; margin-bottom: 0.75rem; }
-        .apk-section {
-            background: linear-gradient(125deg, #0f2a0b, #071a05);
-            border-radius: 48px;
-            padding: 2rem;
-            margin: 3rem 0;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            border: 1px solid #6fbf4c;
-        }
-        .btn-apk {
-            background: #6fbf4c;
+        .close-sidebar {
+            background: none;
             border: none;
-            padding: 1rem 2rem;
-            font-size: 1.3rem;
-            font-weight: 800;
-            border-radius: 60px;
-            color: #071a05;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            text-decoration: none;
-        }
-        .btn-donate {
-            background: linear-gradient(135deg, #ff9800, #ff5722);
-            border: none;
-            padding: 1rem 2rem;
-            font-size: 1.2rem;
-            font-weight: 800;
-            border-radius: 60px;
             color: white;
-            display: inline-flex;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .sidebar-menu {
+            list-style: none;
+        }
+        .sidebar-menu li {
+            margin: 20px 0;
+        }
+        .sidebar-menu a {
+            color: #eef5e9;
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: flex;
             align-items: center;
             gap: 12px;
-            cursor: pointer;
-            margin: 20px auto;
+            transition: 0.2s;
         }
-        .ios-block {
-            background: linear-gradient(135deg, #1a2a1a, #0a1a0a);
-            border-radius: 48px;
-            padding: 2rem;
-            margin: 2rem 0;
+        .sidebar-menu a:hover {
+            color: #6fbf4c;
+            padding-left: 5px;
+        }
+        .menu-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.6);
             border: 1px solid #6fbf4c;
-            text-align: center;
+            border-radius: 12px;
+            padding: 8px 12px;
+            cursor: pointer;
+            z-index: 1001;
+            font-size: 1.5rem;
+            color: #6fbf4c;
+            backdrop-filter: blur(4px);
         }
-        .ios-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            justify-content: center;
-            margin: 1.5rem 0;
+
+        .wrapper {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 1rem 2rem 3rem;
+            transition: margin-left 0.3s;
         }
-        .ios-card {
-            background: rgba(0,0,0,0.5);
-            border-radius: 32px;
-            padding: 1.2rem;
-            width: 200px;
-            text-align: center;
-            border: 1px solid #3a6b2a;
-        }
-        .ios-card a {
-            background: #6fbf4c;
-            display: inline-block;
-            margin-top: 12px;
-            padding: 8px 16px;
-            border-radius: 40px;
-            color: #071a05;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.8rem;
-        }
-        .steps {
-            background: rgba(0,0,0,0.4);
-            border-radius: 32px;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            justify-content: center;
-        }
-        .step { text-align: center; flex: 1; min-width: 160px; }
-        .step-number {
-            background: #6fbf4c;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #071a05;
-            margin-bottom: 12px;
-        }
-        footer {
-            margin-top: 3rem;
-            text-align: center;
-            font-size: 0.8rem;
-            border-top: 1px solid #2c4b21;
-            padding-top: 2rem;
-        }
-        @media (max-width: 720px) {
-            .wrapper { padding: 1rem; }
-            .apk-section { flex-direction: column; text-align: center; gap: 20px; }
-            .hero { flex-direction: column; gap: 20px; text-align: center; }
-        }
+
+        /* Остальные старые стили */
+        .hero { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin: 2rem 0 2rem 3rem; border-bottom: 2px solid rgba(80,180,80,0.4); padding-bottom: 1rem; }
+        .logo-area { display: flex; align-items: center; gap: 20px; }
+        .bear-icon { font-size: 4rem; filter: drop-shadow(0 0 8px #6fbf4c); }
+        .title h1 { font-size: 2.5rem; background: linear-gradient(135deg, #c4ff9e, #6fbf4c); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .auth-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+        .auth-buttons button { background: #2c5a1f; border: none; padding: 8px 20px; border-radius: 40px; color: white; cursor: pointer; }
+        .card-grid { display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 2rem 0; }
+        .card { background: rgba(10,20,8,0.75); backdrop-filter: blur(8px); border-radius: 28px; padding: 1.5rem; flex: 1; min-width: 220px; border: 1px solid #3a6b2a; }
+        .forum-category { background: #0f1f0c; border-radius: 24px; padding: 1rem; margin-top: 2rem; border: 1px solid #2c5a1f; }
+        .forum-category h3 { color: #8bdc6e; margin-bottom: 15px; }
+        .topic-item { background: #1a2a16; margin: 8px 0; padding: 10px 15px; border-radius: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; cursor: pointer; }
+        .topic-title { font-weight: 600; }
+        .topic-meta { font-size: 0.75rem; color: #b5d99c; }
+        .btn-create { background: #6fbf4c; color: #071a05; padding: 6px 16px; border-radius: 30px; border: none; font-weight: bold; margin: 10px 0; cursor: pointer; }
+
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 1100; justify-content: center; align-items: center; }
+        .modal-content { background: #121f0e; max-width: 500px; width: 90%; border-radius: 32px; padding: 2rem; border: 1px solid #6fbf4c; }
+        .modal-content input, .modal-content textarea, .modal-content select { width: 100%; margin: 10px 0; padding: 10px; background: #1b2b16; border: 1px solid #2c5a1f; border-radius: 28px; color: white; }
+        button { cursor: pointer; }
+        .user-status { background: #2c5a1f; padding: 5px 12px; border-radius: 30px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 6px; margin-left: 10px; }
+        footer { text-align: center; margin-top: 3rem; padding: 1rem; border-top: 1px solid #2c4b21; font-size: 0.8rem; }
+        @media (max-width: 720px) { .wrapper { padding: 0.5rem; } .hero { flex-direction: column; text-align: center; } .menu-toggle { top: 10px; left: 10px; } .auth-buttons { justify-content: center; } }
     </style>
 </head>
 <body>
-<div class="wrapper">
-    <div class="hero">
-        <div class="logo-area">
-            <div class="bear-icon">🐻‍❄️🐻 <i class="fas fa-paw" style="color:#6fbf4c;"></i></div>
-            <div class="title">
-                <h1>GREEN RUSSIA</h1>
-                <p>Ролевая игра — выбери путь: одиночка или лидер семьи</p>
-            </div>
-        </div>
-        <div class="stats-badge"><i class="fas fa-users"></i> 1 287 404 игроков <i class="fas fa-tree"></i> Медвежья сила</div>
-    </div>
 
-    <div class="card-grid">
-        <div class="card"><i class="fas fa-hand-fist"></i><h3>Вступай в семью</h3><p>Контролируй районы, защищай территорию.</p></div>
-        <div class="card"><i class="fas fa-map-marked-alt"></i><h3>Удерживай район</h3><p>Битва за ресурсы, строй экономику.</p></div>
-        <div class="card"><i class="fas fa-crown"></i><h3>Стань легендой</h3><p>Одиночка или лидер — выбирай.</p></div>
-    </div>
+<div class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
 
-    <div class="apk-section">
-        <div><h2><i class="fab fa-android"></i> GREEN RUSSIA APK <span style="background:#2c5a1f; padding:0.2rem 0.8rem; border-radius:40px;">Версия 3.2.0 | 32 MB</span></h2><p>Качай официальный клиент и становись частью криминальной вселенной.</p></div>
-        <a class="btn-apk" id="downloadApkBtn" href="https://disk.yandex.ru/d/2lTyrQzPeNO03Q" target="_blank"><i class="fas fa-download"></i> Скачать APK</a>
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <h3><i class="fas fa-paw"></i> Green Russia</h3>
+        <button class="close-sidebar" id="closeSidebar">&times;</button>
     </div>
+    <ul class="sidebar-menu">
+        <li><a href="#" id="navHome"><i class="fas fa-home"></i> Главная</a></li>
+        <li><a href="#" id="navForum"><i class="fas fa-comments"></i> Форум</a></li>
+        <li><a href="#" id="navProfile"><i class="fas fa-user"></i> Профиль</a></li>
+        <li><a href="#" id="navLogout"><i class="fas fa-sign-out-alt"></i> Выйти</a></li>
+    </ul>
+    <hr style="margin:20px 0; border-color:#2c5a1f;">
+    <div style="font-size:0.8rem; text-align:center;">Сервер: <strong>Moscow</strong><br>🐻 Green Russia 2025</div>
+</div>
 
-    <div style="text-align:center;">
-        <button class="btn-donate" id="donateBtn"><i class="fas fa-heart"></i> Поддержать проект Green Russia</button>
-    </div>
-
-    <div class="ios-block">
-        <h2><i class="fab fa-apple"></i> Игра на iPhone</h2>
-        <p>APK не устанавливается напрямую на iOS, но есть простые способы поиграть.</p>
-        <div class="ios-grid">
-            <div class="ios-card"><i class="fas fa-mobile-alt"></i><h3>X8 Sandbox</h3><p>Эмулятор Android в App Store</p><a href="https://apps.apple.com/search?term=X8%20Sandbox" target="_blank">Скачать в App Store</a></div>
-            <div class="ios-card"><i class="fas fa-cloud-upload-alt"></i><h3>Appetize.io</h3><p>Онлайн-эмулятор в браузере</p><a href="https://appetize.io" target="_blank">Открыть сервис</a></div>
-            <div class="ios-card"><i class="fas fa-laptop-code"></i><h3>Bluestacks</h3><p>Играй на компьютере</p><a href="https://www.bluestacks.com" target="_blank">Скачать Bluestacks</a></div>
-        </div>
-        <p style="font-size:0.85rem;">📱 Инструкция: Установи X8 Sandbox → внутри открой браузер → зайди на этот сайт → скачай APK → установи и играй.</p>
-    </div>
-
-    <div class="steps">
-        <div class="step"><div class="step-number">1</div> <strong>Скачай игру</strong><br>APK выше</div>
-        <div class="step"><div class="step-number">2</div> <strong>Введи игровой никнейм</strong><br>Начни путь</div>
-        <div class="step"><div class="step-number">3</div> <strong>Нажми «Играть»</strong><br>Стань хозяином улиц</div>
-    </div>
-
-    <footer>Green Russia — официальный сайт. Поддержи проект через Озон Банк (СБП).<br>flozzy6969.github.io/greenrussia | Вопросы по установке в Telegram канале</footer>
+<div class="wrapper" id="appRoot">
+    <!-- Динамическая загрузка контента -->
 </div>
 
 <script>
-    document.getElementById('donateBtn').onclick = () => window.open('https://finance.ozon.ru/apps/sbp/ozonbankpay/019bfe74-6fa5-7117-8665-deae385c367f', '_blank');
-</script>
-</body>
-</html>
+    // ---- ДАННЫЕ ХРАНИЛИЩЕ ----
+    let users = JSON.parse(localStorage.getItem('gr_users')) || [];
+    let forumTopics = JSON.parse(localStorage.getItem('gr_topics')) || [];
+    let forumReplies = JSON.parse(localStorage.getItem('gr_replies')) || {};
+    let currentUser = localStorage.getItem('gr_currentUser') ? JSON.parse(localStorage.getItem('gr_currentUser')) : null;
+
+    // Админ по умолчанию
+    const adminUser = { login: "Daniil_Werty (Создатель)", password: "54535251", role: "admin" };
+    if (!users.find(u => u.login === adminUser.login)) {
+        users.push(adminUser);
+        localStorage.setItem('gr_users', JSON.stringify(users));
+    }
+
+    // Начальные темы форума (пример)
+    if (forumTopics.length === 0) {
+        const sampleTopics = [
+            { id: 1, title: "Добро пожаловать в Green Russia!", category: "news", author: "Daniil_Werty (Создатель)", date: "2025-05-24", isAdminOnly: true, content: "Играем на сервере Moscow. Уважайте друг друга." },
+            { id: 2, title: "Подача заявки на младшего администратора", category: "staff_apps", author: "Player1", date: "2025-05-24", content: "Хочу стать модератором." }
+        ];
+        forumTopics.push(...sampleTopics);
+        localStorage.setItem('gr_topics', JSON.stringify(forumTopics));
+    }
+
+    function saveAll() {
+        localStorage.setItem('gr_users', JSON.stringify(users));
+        localStorage.setItem('gr_topics', JSON.stringify(forumTopics));
+        localStorage.setItem('gr_replies', JSON.stringify(forumReplies));
+        localStorage.setItem('gr_currentUser', JSON.stringify(currentUser));
+    }
+
+    function isAdmin() { return currentUser && currentUser.role === 'admin'; }
+    function canCreateTopic(category) {
+        if (isAdmin()) return true;
+        if (category === 'news') return false;
+        return true;
+    }
+
+    function renderApp(page) {
+        const root = document.getElementById('appRoot');
+        if (page === 'home') {
+            root.innerHTML = `
+                <div class="hero">
+                    <div class="logo-area"><div class="bear-icon">🐻‍❄️🐻</div><div class="title"><h1>GREEN RUSSIA</h1><p>Ролевая игра — выбери путь</p></div></div>
+                    <div class="auth-buttons" id="authPanel">${!currentUser ? '<button id="showLoginBtn"><i class="fas fa-sign-in-alt"></i> Вход</button><button id="showRegBtn"><i class="fas fa-user-plus"></i> Регистрация</button>' : `<span class="user-status"><i class="fas fa-user-check"></i> ${currentUser.login}</span><button id="logoutBtnHome"><i class="fas fa-sign-out-alt"></i> Выйти</button>`}</div>
+                </div>
+                <div class="card-grid">
+                    <div class="card"><i class="fas fa-hand-fist"></i><h3>Вступай в семью</h3><p>Стань частью братства.</p></div>
+                    <div class="card"><i class="fas fa-map-marked-alt"></i><h3>Удерживай район</h3><p>Битвы за ресурсы.</p></div>
+                    <div class="card"><i class="fas fa-crown"></i><h3>Стань легендой</h3><p>Выбери свой путь.</p></div>
+                </div>
+                <div style="background:#0f2a0b; border-radius:32px; padding:1.5rem; text-align:center"><h3>📱 Скачать игру</h3><a href="https://disk.yandex.ru/d/2lTyrQzPeNO03Q" target="_blank" style="background:#6fbf4c; display:inline-block; padding:12px 24px; border-radius:40px; color:#071a05; text-decoration:none; font-weight:bold;"><i class="fab fa-android"></i> GreenRussia.apk (32 МБ)</a><p style="margin-top:8px;">Для iPhone используйте эмулятор X8 Sandbox</p></div>
+            `;
+            attachAuthEvents();
+        } 
+        else if (page === 'forum') {
+            const categories = [
+                { id: 'news', name: '📢 Новости проекта', adminOnlyPost: true },
+                { id: 'staff_apps', name: '📝 Заявки на младшего администратора' },
+                { id: 'player_complaints', name: '⚠️ Жалобы на игроков' },
+                { id: 'admin_complaints', name: '👑 Жалобы на администраторов' },
+                { id: 'leader_complaints', name: '🏛️ Жалобы на лидеров' },
+                { id: 'general', name: '💬 Общий раздел' }
+            ];
+            let html = `<div style="display:flex; justify-content:space-between; margin:1rem 0;"><h2><i class="fas fa-comments"></i> Форум Green Russia</h2>${currentUser ? `<button id="globalCreateTopicBtn" class="btn-create"><i class="fas fa-plus"></i> Создать тему</button>` : ''}</div>`;
+            for (let cat of categories) {
+                const topicsList = forumTopics.filter(t => t.category === cat.id);
+                html += `<div class="forum-category"><h3>${cat.name}</h3>`;
+                if (topicsList.length === 0) html += `<p style="padding:10px;">Пока нет тем.</p>`;
+                for (let topic of topicsList) {
+                    const repliesCount = forumReplies[topic.id] ? forumReplies[topic.id].length : 0;
+                    html += `<div class="topic-item" data-topicid="${topic.id}">
+                                <div><span class="topic-title">${topic.title}</span><div class="topic-meta">Автор: ${topic.author} | ${topic.date} | Ответов: ${repliesCount}</div></div>
+                                <div><button class="viewTopicBtn" data-id="${topic.id}">Открыть</button></div>
+                            </div>`;
+                }
+                html += `</div>`;
+            }
+            root.innerHTML = html;
+            document.querySelectorAll('.viewTopicBtn').forEach(btn => {
+                btn.addEventListener('click', (e) => { const id = parseInt(btn.dataset.id); showTopicModal(id); });
+            });
+            document.getElementById('globalCreateTopicBtn')?.addEventListener('click', () => showCreateTopicModal());
+        } 
+        else if (page === 'profile') {
+            if (!currentUser) { renderApp('home'); return; }
+            root.innerHTML = `<div style="background:#0f1f0c; border-radius:32px; padding:2rem; margin-top:2rem;"><h2><i class="fas fa-user-circle"></i> Профиль</h2><p><strong>Логин:</strong> ${currentUser.login}</p><p><strong>Роль:</strong> ${currentUser.role === 'admin' ? 'Администратор' : 'Игрок'}</p><p><strong>Сервер:</strong> Moscow</p><button id="logoutProfileBtn" class="btn-create">Выйти из аккаунта</button></div>`;
+            document.getElementById('logoutProfileBtn')?.addEventListener('click', () => { logout(); renderApp('home'); });
+        }
+    }
+
+    function showTopicModal(topicId) {
+        const topic = forumTopics.find(t => t.id === topicId);
+        if (!topic) return;
+        const replies = forumReplies[topicId] || [];
+        let modalHtml = `
+            <div class="modal" id="topicModal" style="display:flex;">
+                <div class="modal-content" style="max-width:600px; max-height:80vh; overflow-y:auto;">
+                    <h3>${topic.title}</h3>
+                    <p><small>Автор: ${topic.author} | ${topic.date}</small></p>
+                    <p>${topic.content || 'Текст не указан'}</p>
+                    <hr><h4>Ответы:</h4>
+                    <div id="repliesList">${replies.length ? replies.map(r => `<div style="border-left:2px solid #6fbf4c; margin:8px 0; padding:8px;"><b>${r.author}</b>: ${r.text}<br><small>${r.date}</small></div>`).join('') : '<p>Нет ответов</p>'}</div>
+                    ${currentUser ? `<textarea id="replyText" placeholder="Ваш ответ..." rows="2" style="width:100%; margin:10px 0;"></textarea><button id="sendReplyBtn" class="btn-create">Ответить</button>` : '<p><i class="fas fa-lock"></i> Войдите, чтобы ответить</p>'}
+                    <button id="closeTopicModal" style="margin-top:10px; background:#333;">Закрыть</button>
+                </div>
+            </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', modalHtml);
+        document.getElementById('sendReplyBtn')?.addEventListener('click', () => {
+            const text = document.getElementById('replyText').value;
+            if (!text.trim()) return alert('Введите текст');
+            const newReply = { author: currentUser.login, text: text, date: new Date().toLocaleString() };
+            if (!forumReplies[topicId]) forumReplies[topicId] = [];
+            forumReplies[topicId].push(newReply);
+            saveAll();
+            document.getElementById('topicModal')?.remove();
+            showTopicModal(topicId);
+        });
+        document.getElementById('closeTopicModal')?.addEventListener('click', () => document.getElementById('topicModal')?.remove());
+    }
+
+    function showCreateTopicModal() {
+        if (!currentUser) return alert('Сначала войдите в аккаунт');
+        const categories = [
+            { id: 'news', name: '📢 Новости проекта', adminOnlyPost: true },
+            { id: 'staff_apps', name: '📝 Заявки на младшего администратора' },
+            { id: 'player_complaints', name: '⚠️ Жалобы на игроков' },
+            { id: 'admin_complaints', name: '👑 Жалобы на администраторов' },
+            { id: 'leader_complaints', name: '🏛️ Жалобы на лидеров' },
+            { id: 'general', name: '💬 Общий раздел' }
+        ];
+        let catOptions = categories.map(c => `<option value="${c.id}" ${c.adminOnlyPost && !isAdmin() ? 'disabled' : ''}>${c.name} ${c.adminOnlyPost && !isAdmin() ? '(только админ)' : ''}</option>`).join('');
+        let html = `
+            <div class="modal" id="createModal" style="display:flex;">
+                <div class="modal-content">
+                    <h3>Создать тему</h3>
+                    <select id="topicCategory">${catOptions}</select>
+                    <input type="text" id="topicTitle" placeholder="Заголовок">
+                    <textarea id="topicContent" placeholder="Содержание..." rows="4"></textarea>
+                    <div style="display:flex; gap:10px; margin-top:15px;">
+                        <button id="submitTopicBtn" class="btn-create">Опубликовать</button>
+                        <button id="cancelTopicBtn">Отмена</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', html);
+        document.getElementById('submitTopicBtn').onclick = () => {
+            const category = document.getElementById('topicCategory').value;
+            const title = document.getElementById('topicTitle').value.trim();
+            const content = document.getElementById('topicContent').value.trim();
+            if (!title) return alert('Введите заголовок');
+            if (category === 'news' && !isAdmin()) return alert('Только администратор может создавать новости');
+            const newTopic = {
+                id: Date.now(),
+                title: title,
+                category: category,
+                author: currentUser.login,
+                date: new Date().toLocaleDateString(),
+                content: content || '—'
+            };
+            forumTopics.push(newTopic);
+            saveAll();
+            document.getElementById('createModal').remove();
+            renderApp('forum');
+        };
+        document.getElementById('cancelTopicBtn').onclick = () => document.getElementById('createModal').remove();
+    }
+
+    function showLoginModal() {
+        let modalDiv = document.createElement('div'); modalDiv.className = 'modal'; modalDiv.style.display = 'flex';
+        modalDiv.innerHTML = `<div class="modal-content"><h3>Вход</h3><input id="loginName" placeholder="Логин"><input id="loginPass" type="password" placeholder="Пароль"><button id="doLoginBtn" style="margin:10px 0;">Войти</button><button id="closeLoginBtn">Отмена</button></div>`;
+        document.body.appendChild(modalDiv);
+        document.getElementById('doLoginBtn').onclick = () => {
+            const login = document.getElementById('loginName').value;
+            const pass = document.getElementById('loginPass').value;
+            const user = users.find(u => u.login === login && u.password === pass);
+            if (user) { currentUser = { login: user.login, role: user.role }; localStorage.setItem('gr_currentUser', JSON.stringify(currentUser)); modalDiv.remove(); renderApp('home'); }
+            else alert('Неверный логин или пароль');
+        };
+        document.getElementById('closeLoginBtn').onclick = () => modalDiv.remove();
+    }
+
+    function showRegisterModal() {
+        let modalDiv = document.createElement('div'); modalDiv.className = 'modal'; modalDiv.style.display = 'flex';
+        modalDiv.innerHTML = `<div class="modal-content"><h3>Регистрация</h3><input id="regLogin" placeholder="Логин"><input id="regPass" type="password" placeholder="Пароль"><input id="regPass2" type="password" placeholder="Повтор пароля"><button id="doRegBtn">Зарегистрироваться</button><button id="closeRegBtn">Отмена</button></div>`;
+        document.body.appendChild(modalDiv);
+        document.getElementById('doRegBtn').onclick = () => {
+            const login = document.getElementById('regLogin').value.trim();
+            const pass = document.getElementById('regPass').value;
+            const pass2 = document.getElementById('regPass2').value;
+            if (!login || !pass) return alert('Заполните поля');
+            if (pass !== pass2) return alert('Пароли не совпадают');
+            if (users.find(u => u.login === login)) return alert
