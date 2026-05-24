@@ -2,139 +2,232 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Green Russia — официальный сайт</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Green Russia — криминальная RPG | Скачать APK</title>
+    <meta name="description" content="Green Russia — ролевая игра. Качай APK, вступай в семью, захватывай районы.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        *{margin:0;padding:0;box-sizing:border-box;}
-        body{background:radial-gradient(circle at 10%20%,#0a1f0e,#030a05);font-family:sans-serif;color:#eef5e9;line-height:1.4;}
-        .wrapper{max-width:1200px;margin:0 auto;padding:20px;}
-        .hero{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-bottom:30px;}
-        .bear-icon{font-size:64px;filter:drop-shadow(0 0 8px #6fbf4c);}
-        .title h1{font-size:2.5rem;background:linear-gradient(135deg,#c4ff9e,#6fbf4c);-webkit-background-clip:text;background-clip:text;color:transparent;}
-        .card{background:#0f1f0c;border-radius:28px;padding:24px;margin:20px 0;border:1px solid #2c5a1f;}
-        .btn{background:#6fbf4c;border:none;padding:12px 24px;border-radius:60px;font-weight:bold;cursor:pointer;margin:5px;display:inline-flex;align-items:center;gap:8px;color:#071a05;font-size:1rem;}
-        .btn-donate{background:linear-gradient(135deg,#ff9800,#ff5722);color:white;}
-        .ref-link{background:#071a05;padding:12px;border-radius:30px;word-break:break-all;margin:15px 0;font-family:monospace;font-size:12px;}
-        .bonus-list{background:#1a2a16;border-radius:24px;padding:18px;margin-top:15px;}
-        .bonus-item{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #2c5a1f;}
-        .footer{text-align:center;margin-top:40px;padding:20px;border-top:1px solid #2c4b21;font-size:0.8rem;}
-        .green-text{color:#6fbf4c;font-weight:bold;}
-        .flex-between{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;}
-        i{margin-right:8px;}
-        .invite-count{font-size:28px;font-weight:bold;color:#6fbf4c;}
-        @media (max-width:720px){.hero{flex-direction:column;text-align:center;gap:15px;}}
-        .tg-link{background:#0088cc;display:inline-block;padding:8px 20px;border-radius:40px;margin-top:10px;color:white;text-decoration:none;}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: radial-gradient(circle at 10% 20%, #0a1f0e, #030a05);
+            font-family: 'Inter', sans-serif;
+            color: #eef5e9;
+            line-height: 1.4;
+        }
+        .wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem 3rem;
+            position: relative;
+            z-index: 2;
+        }
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding: 1rem 0;
+            border-bottom: 2px solid rgba(80, 180, 80, 0.4);
+        }
+        .logo-area { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+        .bear-icon { font-size: 4.5rem; filter: drop-shadow(0 0 8px #6fbf4c); }
+        .title h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #c4ff9e, #6fbf4c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .stats-badge {
+            background: rgba(0,0,0,0.65);
+            backdrop-filter: blur(8px);
+            padding: 0.6rem 1.2rem;
+            border-radius: 60px;
+            border-left: 4px solid #6fbf4c;
+        }
+        .card-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        .card {
+            flex: 1;
+            min-width: 260px;
+            background: rgba(10, 20, 8, 0.75);
+            backdrop-filter: blur(12px);
+            border-radius: 32px;
+            border: 1px solid rgba(111, 191, 76, 0.4);
+            padding: 1.6rem;
+            transition: 0.25s;
+        }
+        .card:hover { border-color: #8bdc6e; transform: translateY(-5px); }
+        .card i { font-size: 2.4rem; color: #8bdc6e; margin-bottom: 1rem; }
+        .card h3 { font-size: 1.7rem; font-weight: 700; margin-bottom: 0.75rem; }
+        .apk-section {
+            background: linear-gradient(125deg, #0f2a0b, #071a05);
+            border-radius: 48px;
+            padding: 2rem;
+            margin: 3rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid #6fbf4c;
+        }
+        .btn-apk {
+            background: #6fbf4c;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.3rem;
+            font-weight: 800;
+            border-radius: 60px;
+            color: #071a05;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn-donate {
+            background: linear-gradient(135deg, #ff9800, #ff5722);
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            font-weight: 800;
+            border-radius: 60px;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            margin: 20px auto;
+        }
+        .ios-block {
+            background: linear-gradient(135deg, #1a2a1a, #0a1a0a);
+            border-radius: 48px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid #6fbf4c;
+            text-align: center;
+        }
+        .ios-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+        .ios-card {
+            background: rgba(0,0,0,0.5);
+            border-radius: 32px;
+            padding: 1.2rem;
+            width: 200px;
+            text-align: center;
+            border: 1px solid #3a6b2a;
+        }
+        .ios-card a {
+            background: #6fbf4c;
+            display: inline-block;
+            margin-top: 12px;
+            padding: 8px 16px;
+            border-radius: 40px;
+            color: #071a05;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        .steps {
+            background: rgba(0,0,0,0.4);
+            border-radius: 32px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .step { text-align: center; flex: 1; min-width: 160px; }
+        .step-number {
+            background: #6fbf4c;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #071a05;
+            margin-bottom: 12px;
+        }
+        footer {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.8rem;
+            border-top: 1px solid #2c4b21;
+            padding-top: 2rem;
+        }
+        @media (max-width: 720px) {
+            .wrapper { padding: 1rem; }
+            .apk-section { flex-direction: column; text-align: center; gap: 20px; }
+            .hero { flex-direction: column; gap: 20px; text-align: center; }
+        }
     </style>
 </head>
 <body>
-
 <div class="wrapper">
     <div class="hero">
-        <div class="flex-between" style="gap:20px;">
-            <div class="bear-icon">🐻‍❄️🐻</div>
-            <div class="title"><h1>GREEN RUSSIA</h1><p>Ролевая игра на сервере Moscow</p></div>
+        <div class="logo-area">
+            <div class="bear-icon">🐻‍❄️🐻 <i class="fas fa-paw" style="color:#6fbf4c;"></i></div>
+            <div class="title">
+                <h1>GREEN RUSSIA</h1>
+                <p>Ролевая игра — выбери путь: одиночка или лидер семьи</p>
+            </div>
         </div>
-        <div></div>
+        <div class="stats-badge"><i class="fas fa-users"></i> 1 287 404 игроков <i class="fas fa-tree"></i> Медвежья сила</div>
     </div>
 
-    <div class="card" id="refBlock">
-        <h2><i class="fas fa-user-plus"></i> Твоя реферальная ссылка</h2>
-        <p>Кидай ссылку друзьям. За каждого приглашённого ты получаешь бонусы в игре!</p>
-        <div class="ref-link" id="refLink">Загрузка...</div>
-        <button class="btn" id="copyRefBtn"><i class="fas fa-copy"></i> Скопировать ссылку</button>
-        
-        <div style="margin-top:20px; text-align:center;">
-            <span style="font-size:18px;">👥 Приглашено друзей:</span>
-            <div class="invite-count" id="inviteCount">0</div>
-        </div>
-
-        <div class="bonus-list">
-            <h3>🎁 Бонусы за приглашённых друзей:</h3>
-            <div class="bonus-item"><span>1 друг</span><span class="green-text">5.000.000 игровой валюты</span></div>
-            <div class="bonus-item"><span>3 друга</span><span class="green-text">50.000.000 игровой валюты</span></div>
-            <div class="bonus-item"><span>10 друзей</span><span class="green-text">100.000.000 игровой валюты</span></div>
-            <div class="bonus-item"><span>25 друзей</span><span class="green-text">500.000.000 игровой валюты</span></div>
-        </div>
-        
-        <div style="margin-top:20px; text-align:center;">
-            <p>📢 <strong>Как получить бонус?</strong> Напиши создателю проекта в Telegram: <br>
-            <a href="https://t.me/wflossy" target="_blank" class="tg-link"><i class="fab fa-telegram"></i> @wflossy</a>
-            </p>
-            <p style="font-size:12px; margin-top:10px;">Укажи свой ник и сколько друзей пригласил. Бонус выдадут в игре!</p>
-        </div>
+    <div class="card-grid">
+        <div class="card"><i class="fas fa-hand-fist"></i><h3>Вступай в семью</h3><p>Контролируй районы, защищай территорию.</p></div>
+        <div class="card"><i class="fas fa-map-marked-alt"></i><h3>Удерживай район</h3><p>Битва за ресурсы, строй экономику.</p></div>
+        <div class="card"><i class="fas fa-crown"></i><h3>Стань легендой</h3><p>Одиночка или лидер — выбирай.</p></div>
     </div>
 
-    <div class="card">
-        <h2><i class="fas fa-download"></i> Скачать игру</h2>
-        <a href="https://disk.yandex.ru/d/2lTyrQzPeNO03Q" target="_blank"><button class="btn"><i class="fab fa-android"></i> GreenRussia.apk (32 МБ)</button></a>
-        <p style="margin-top:10px;"><small>Для iPhone: установите X8 Sandbox из App Store, внутри эмулятора скачайте APK</small></p>
+    <div class="apk-section">
+        <div><h2><i class="fab fa-android"></i> GREEN RUSSIA APK <span style="background:#2c5a1f; padding:0.2rem 0.8rem; border-radius:40px;">Версия 3.2.0 | 32 MB</span></h2><p>Качай официальный клиент и становись частью криминальной вселенной.</p></div>
+        <a class="btn-apk" id="downloadApkBtn" href="https://disk.yandex.ru/d/2lTyrQzPeNO03Q" target="_blank"><i class="fas fa-download"></i> Скачать APK</a>
     </div>
 
-    <div class="card">
-        <h2><i class="fas fa-heart"></i> Поддержать проект</h2>
-        <a href="https://finance.ozon.ru/apps/sbp/ozonbankpay/019bfe74-6fa5-7117-8665-deae385c367f" target="_blank"><button class="btn btn-donate"><i class="fas fa-heart"></i> Озон Банк (анонимно)</button></a>
+    <div style="text-align:center;">
+        <button class="btn-donate" id="donateBtn"><i class="fas fa-heart"></i> Поддержать проект Green Russia</button>
     </div>
 
-    <div class="footer">Green Russia — официальный сайт | flozzy6969.github.io/greenrussia</div>
+    <div class="ios-block">
+        <h2><i class="fab fa-apple"></i> Игра на iPhone</h2>
+        <p>APK не устанавливается напрямую на iOS, но есть простые способы поиграть.</p>
+        <div class="ios-grid">
+            <div class="ios-card"><i class="fas fa-mobile-alt"></i><h3>X8 Sandbox</h3><p>Эмулятор Android в App Store</p><a href="https://apps.apple.com/search?term=X8%20Sandbox" target="_blank">Скачать в App Store</a></div>
+            <div class="ios-card"><i class="fas fa-cloud-upload-alt"></i><h3>Appetize.io</h3><p>Онлайн-эмулятор в браузере</p><a href="https://appetize.io" target="_blank">Открыть сервис</a></div>
+            <div class="ios-card"><i class="fas fa-laptop-code"></i><h3>Bluestacks</h3><p>Играй на компьютере</p><a href="https://www.bluestacks.com" target="_blank">Скачать Bluestacks</a></div>
+        </div>
+        <p style="font-size:0.85rem;">📱 Инструкция: Установи X8 Sandbox → внутри открой браузер → зайди на этот сайт → скачай APK → установи и играй.</p>
+    </div>
+
+    <div class="steps">
+        <div class="step"><div class="step-number">1</div> <strong>Скачай игру</strong><br>APK выше</div>
+        <div class="step"><div class="step-number">2</div> <strong>Введи игровой никнейм</strong><br>Начни путь</div>
+        <div class="step"><div class="step-number">3</div> <strong>Нажми «Играть»</strong><br>Стань хозяином улиц</div>
+    </div>
+
+    <footer>Green Russia — официальный сайт. Поддержи проект через Озон Банк (СБП).<br>flozzy6969.github.io/greenrussia | Вопросы по установке в Telegram канале</footer>
 </div>
 
 <script>
-    // Генерируем уникальный ID для пользователя (хранится в браузере)
-    let userId = localStorage.getItem('gr_userId');
-    if (!userId) {
-        userId = 'user_' + Math.random().toString(36).substr(2, 16);
-        localStorage.setItem('gr_userId', userId);
-    }
-
-    // Загружаем счётчик приглашённых
-    let invites = JSON.parse(localStorage.getItem('gr_invites')) || {};
-    let myInvites = invites[userId] || [];
-
-    // Функция сохранения
-    function saveInvites() {
-        invites[userId] = myInvites;
-        localStorage.setItem('gr_invites', JSON.stringify(invites));
-        document.getElementById('inviteCount').innerText = myInvites.length;
-    }
-
-    // Обработка перехода по реферальной ссылке
-    function handleReferral() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const ref = urlParams.get('ref');
-        if (ref && ref !== userId) {
-            // Добавляем приглашённого, если его ещё нет
-            if (!invites[ref]) invites[ref] = [];
-            if (!invites[ref].includes(userId)) {
-                invites[ref].push(userId);
-                localStorage.setItem('gr_invites', JSON.stringify(invites));
-            }
-            // Убираем ref из URL, чтобы не считать повторно
-            window.history.replaceState({}, '', window.location.pathname);
-        }
-    }
-
-    // Отображаем ссылку
-    function updateRefLink() {
-        const link = `${window.location.origin}${window.location.pathname}?ref=${userId}`;
-        document.getElementById('refLink').innerText = link;
-    }
-
-    // Копирование ссылки
-    document.getElementById('copyRefBtn')?.addEventListener('click', () => {
-        const link = `${window.location.origin}${window.location.pathname}?ref=${userId}`;
-        navigator.clipboard.writeText(link);
-        alert('Ссылка скопирована! Кидай её друзьям.');
-    });
-
-    // Инициализация
-    handleReferral();
-    updateRefLink();
-    
-    // Обновляем счётчик для текущего пользователя (если менялось)
-    let currentInvites = invites[userId] || [];
-    myInvites = currentInvites;
-    saveInvites();
+    document.getElementById('donateBtn').onclick = () => window.open('https://finance.ozon.ru/apps/sbp/ozonbankpay/019bfe74-6fa5-7117-8665-deae385c367f', '_blank');
 </script>
 </body>
 </html>
