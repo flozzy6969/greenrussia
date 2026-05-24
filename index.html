@@ -2,343 +2,195 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Green Russia — официальный сайт и форум</title>
-    <meta name="description" content="Green Russia — ролевая игра на сервере Moscow. Форум, регистрация, новости, заявки и жалобы.">
+    <title>Green Russia — форум и сайт</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: radial-gradient(circle at 10% 20%, #0a1f0e, #030a05);
-            font-family: 'Inter', sans-serif;
-            color: #eef5e9;
-            line-height: 1.4;
-            min-height: 100vh;
-        }
-
-        /* Боковое меню (три полоски) */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: -280px;
-            width: 280px;
-            height: 100%;
-            background: #0a1a08;
-            backdrop-filter: blur(10px);
-            border-right: 1px solid #6fbf4c;
-            z-index: 1000;
-            transition: left 0.3s ease;
-            padding: 20px;
-            box-shadow: 5px 0 25px rgba(0,0,0,0.5);
-        }
-        .sidebar.open {
-            left: 0;
-        }
-        .sidebar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            border-bottom: 1px solid #2c4b21;
-            padding-bottom: 15px;
-        }
-        .sidebar-header h3 {
-            color: #6fbf4c;
-        }
-        .close-sidebar {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-        }
-        .sidebar-menu {
-            list-style: none;
-        }
-        .sidebar-menu li {
-            margin: 20px 0;
-        }
-        .sidebar-menu a {
-            color: #eef5e9;
-            text-decoration: none;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: 0.2s;
-        }
-        .sidebar-menu a:hover {
-            color: #6fbf4c;
-            padding-left: 5px;
-        }
-        .menu-toggle {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background: rgba(0,0,0,0.6);
-            border: 1px solid #6fbf4c;
-            border-radius: 12px;
-            padding: 8px 12px;
-            cursor: pointer;
-            z-index: 1001;
-            font-size: 1.5rem;
-            color: #6fbf4c;
-            backdrop-filter: blur(4px);
-        }
-
-        .wrapper {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 1rem 2rem 3rem;
-            transition: margin-left 0.3s;
-        }
-
-        /* Остальные старые стили */
-        .hero { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin: 2rem 0 2rem 3rem; border-bottom: 2px solid rgba(80,180,80,0.4); padding-bottom: 1rem; }
-        .logo-area { display: flex; align-items: center; gap: 20px; }
-        .bear-icon { font-size: 4rem; filter: drop-shadow(0 0 8px #6fbf4c); }
-        .title h1 { font-size: 2.5rem; background: linear-gradient(135deg, #c4ff9e, #6fbf4c); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .auth-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
-        .auth-buttons button { background: #2c5a1f; border: none; padding: 8px 20px; border-radius: 40px; color: white; cursor: pointer; }
-        .card-grid { display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 2rem 0; }
-        .card { background: rgba(10,20,8,0.75); backdrop-filter: blur(8px); border-radius: 28px; padding: 1.5rem; flex: 1; min-width: 220px; border: 1px solid #3a6b2a; }
-        .forum-category { background: #0f1f0c; border-radius: 24px; padding: 1rem; margin-top: 2rem; border: 1px solid #2c5a1f; }
-        .forum-category h3 { color: #8bdc6e; margin-bottom: 15px; }
-        .topic-item { background: #1a2a16; margin: 8px 0; padding: 10px 15px; border-radius: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; cursor: pointer; }
-        .topic-title { font-weight: 600; }
-        .topic-meta { font-size: 0.75rem; color: #b5d99c; }
-        .btn-create { background: #6fbf4c; color: #071a05; padding: 6px 16px; border-radius: 30px; border: none; font-weight: bold; margin: 10px 0; cursor: pointer; }
-
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 1100; justify-content: center; align-items: center; }
-        .modal-content { background: #121f0e; max-width: 500px; width: 90%; border-radius: 32px; padding: 2rem; border: 1px solid #6fbf4c; }
-        .modal-content input, .modal-content textarea, .modal-content select { width: 100%; margin: 10px 0; padding: 10px; background: #1b2b16; border: 1px solid #2c5a1f; border-radius: 28px; color: white; }
-        button { cursor: pointer; }
-        .user-status { background: #2c5a1f; padding: 5px 12px; border-radius: 30px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 6px; margin-left: 10px; }
-        footer { text-align: center; margin-top: 3rem; padding: 1rem; border-top: 1px solid #2c4b21; font-size: 0.8rem; }
-        @media (max-width: 720px) { .wrapper { padding: 0.5rem; } .hero { flex-direction: column; text-align: center; } .menu-toggle { top: 10px; left: 10px; } .auth-buttons { justify-content: center; } }
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{background:radial-gradient(circle at 10%20%,#0a1f0e,#030a05);font-family:sans-serif;color:#eef5e9;}
+        .sidebar{position:fixed;top:0;left:-260px;width:260px;height:100%;background:#0a1a08;border-right:1px solid #6fbf4c;transition:0.3s;padding:20px;z-index:1000;}
+        .sidebar.open{left:0;}
+        .menu-toggle{position:fixed;top:15px;left:15px;background:#000000aa;border:1px solid #6fbf4c;border-radius:12px;padding:8px 12px;cursor:pointer;z-index:1001;color:#6fbf4c;font-size:24px;}
+        .close-sidebar{float:right;background:none;border:none;color:#fff;font-size:24px;cursor:pointer;}
+        .sidebar-menu{list-style:none;margin-top:40px;}
+        .sidebar-menu li{margin:20px 0;}
+        .sidebar-menu a{color:#fff;text-decoration:none;font-size:18px;}
+        .wrapper{max-width:1200px;margin:0 auto;padding:70px 20px 20px;}
+        .hero{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-bottom:30px;}
+        .bear-icon{font-size:48px;}
+        .title h1{background:linear-gradient(135deg,#c4ff9e,#6fbf4c);-webkit-background-clip:text;background-clip:text;color:transparent;}
+        .card{background:#0f1f0c;border-radius:24px;padding:20px;margin:15px 0;border:1px solid #2c5a1f;}
+        .btn{background:#6fbf4c;border:none;padding:10px 20px;border-radius:40px;font-weight:bold;cursor:pointer;margin:5px;}
+        .forum-category{background:#0f1f0c;border-radius:24px;padding:15px;margin-bottom:20px;}
+        .topic-item{background:#1a2a16;padding:12px;border-radius:20px;margin:8px 0;display:flex;justify-content:space-between;flex-wrap:wrap;cursor:pointer;}
+        .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#000000cc;justify-content:center;align-items:center;z-index:1100;}
+        .modal-content{background:#121f0e;padding:20px;border-radius:28px;width:90%;max-width:500px;}
+        input,textarea,select{width:100%;margin:8px 0;padding:10px;background:#1b2b16;border:1px solid #2c5a1f;border-radius:28px;color:#fff;}
+        footer{text-align:center;margin-top:40px;padding:20px;border-top:1px solid #2c4b21;}
     </style>
 </head>
 <body>
 
 <div class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
-
 <div class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-        <h3><i class="fas fa-paw"></i> Green Russia</h3>
-        <button class="close-sidebar" id="closeSidebar">&times;</button>
-    </div>
+    <button class="close-sidebar" id="closeSidebar">&times;</button>
     <ul class="sidebar-menu">
         <li><a href="#" id="navHome"><i class="fas fa-home"></i> Главная</a></li>
         <li><a href="#" id="navForum"><i class="fas fa-comments"></i> Форум</a></li>
         <li><a href="#" id="navProfile"><i class="fas fa-user"></i> Профиль</a></li>
         <li><a href="#" id="navLogout"><i class="fas fa-sign-out-alt"></i> Выйти</a></li>
     </ul>
-    <hr style="margin:20px 0; border-color:#2c5a1f;">
-    <div style="font-size:0.8rem; text-align:center;">Сервер: <strong>Moscow</strong><br>🐻 Green Russia 2025</div>
+    <hr style="margin:20px 0;">
+    <div style="text-align:center;">Сервер <strong>Moscow</strong><br>🐻 Green Russia</div>
 </div>
 
-<div class="wrapper" id="appRoot">
-    <!-- Динамическая загрузка контента -->
-</div>
+<div class="wrapper" id="app"></div>
+<footer>Green Russia — официальный сайт и форум | flozzy6969.github.io/greenrussia</footer>
 
 <script>
-    // ---- ДАННЫЕ ХРАНИЛИЩЕ ----
     let users = JSON.parse(localStorage.getItem('gr_users')) || [];
-    let forumTopics = JSON.parse(localStorage.getItem('gr_topics')) || [];
-    let forumReplies = JSON.parse(localStorage.getItem('gr_replies')) || {};
-    let currentUser = localStorage.getItem('gr_currentUser') ? JSON.parse(localStorage.getItem('gr_currentUser')) : null;
+    let topics = JSON.parse(localStorage.getItem('gr_topics')) || [];
+    let replies = JSON.parse(localStorage.getItem('gr_replies')) || {};
+    let currentUser = localStorage.getItem('gr_user') ? JSON.parse(localStorage.getItem('gr_user')) : null;
 
-    // Админ по умолчанию
-    const adminUser = { login: "Daniil_Werty (Создатель)", password: "54535251", role: "admin" };
-    if (!users.find(u => u.login === adminUser.login)) {
-        users.push(adminUser);
-        localStorage.setItem('gr_users', JSON.stringify(users));
-    }
-
-    // Начальные темы форума (пример)
-    if (forumTopics.length === 0) {
-        const sampleTopics = [
-            { id: 1, title: "Добро пожаловать в Green Russia!", category: "news", author: "Daniil_Werty (Создатель)", date: "2025-05-24", isAdminOnly: true, content: "Играем на сервере Moscow. Уважайте друг друга." },
-            { id: 2, title: "Подача заявки на младшего администратора", category: "staff_apps", author: "Player1", date: "2025-05-24", content: "Хочу стать модератором." }
-        ];
-        forumTopics.push(...sampleTopics);
-        localStorage.setItem('gr_topics', JSON.stringify(forumTopics));
-    }
+    const adminLogin = "Daniil_Werty (Создатель)";
+    const adminPass = "54535251";
+    if (!users.find(u => u.login === adminLogin)) users.push({ login: adminLogin, password: adminPass, role: "admin" });
+    localStorage.setItem('gr_users', JSON.stringify(users));
 
     function saveAll() {
         localStorage.setItem('gr_users', JSON.stringify(users));
-        localStorage.setItem('gr_topics', JSON.stringify(forumTopics));
-        localStorage.setItem('gr_replies', JSON.stringify(forumReplies));
-        localStorage.setItem('gr_currentUser', JSON.stringify(currentUser));
+        localStorage.setItem('gr_topics', JSON.stringify(topics));
+        localStorage.setItem('gr_replies', JSON.stringify(replies));
+        if (currentUser) localStorage.setItem('gr_user', JSON.stringify(currentUser));
+        else localStorage.removeItem('gr_user');
     }
 
-    function isAdmin() { return currentUser && currentUser.role === 'admin'; }
-    function canCreateTopic(category) {
-        if (isAdmin()) return true;
-        if (category === 'news') return false;
-        return true;
-    }
+    function isAdmin() { return currentUser && currentUser.role === "admin"; }
 
-    function renderApp(page) {
-        const root = document.getElementById('appRoot');
+    function render(page) {
+        const app = document.getElementById('app');
         if (page === 'home') {
-            root.innerHTML = `
+            app.innerHTML = `
                 <div class="hero">
-                    <div class="logo-area"><div class="bear-icon">🐻‍❄️🐻</div><div class="title"><h1>GREEN RUSSIA</h1><p>Ролевая игра — выбери путь</p></div></div>
-                    <div class="auth-buttons" id="authPanel">${!currentUser ? '<button id="showLoginBtn"><i class="fas fa-sign-in-alt"></i> Вход</button><button id="showRegBtn"><i class="fas fa-user-plus"></i> Регистрация</button>' : `<span class="user-status"><i class="fas fa-user-check"></i> ${currentUser.login}</span><button id="logoutBtnHome"><i class="fas fa-sign-out-alt"></i> Выйти</button>`}</div>
+                    <div><div class="bear-icon">🐻‍❄️🐻</div><div class="title"><h1>GREEN RUSSIA</h1><p>Ролевая игра на сервере Moscow</p></div></div>
+                    <div>${!currentUser ? '<button class="btn" id="showLogin">Вход</button><button class="btn" id="showReg">Регистрация</button>' : `<span style="background:#2c5a1f; padding:8px 16px; border-radius:40px;">${currentUser.login}</span><button class="btn" id="logoutBtn">Выйти</button>`}</div>
                 </div>
-                <div class="card-grid">
-                    <div class="card"><i class="fas fa-hand-fist"></i><h3>Вступай в семью</h3><p>Стань частью братства.</p></div>
-                    <div class="card"><i class="fas fa-map-marked-alt"></i><h3>Удерживай район</h3><p>Битвы за ресурсы.</p></div>
-                    <div class="card"><i class="fas fa-crown"></i><h3>Стань легендой</h3><p>Выбери свой путь.</p></div>
-                </div>
-                <div style="background:#0f2a0b; border-radius:32px; padding:1.5rem; text-align:center"><h3>📱 Скачать игру</h3><a href="https://disk.yandex.ru/d/2lTyrQzPeNO03Q" target="_blank" style="background:#6fbf4c; display:inline-block; padding:12px 24px; border-radius:40px; color:#071a05; text-decoration:none; font-weight:bold;"><i class="fab fa-android"></i> GreenRussia.apk (32 МБ)</a><p style="margin-top:8px;">Для iPhone используйте эмулятор X8 Sandbox</p></div>
+                <div class="card"><i class="fas fa-download"></i> <strong>Скачать APK (32 МБ)</strong><br><a href="https://disk.yandex.ru/d/2lTyrQzPeNO03Q" target="_blank" style="color:#6fbf4c;">Ссылка на Яндекс.Диск</a><br><small>Для iPhone: X8 Sandbox (App Store)</small></div>
+                <div class="card"><i class="fas fa-heart"></i> <strong>Поддержать проект</strong><br><a href="https://finance.ozon.ru/apps/sbp/ozonbankpay/019bfe74-6fa5-7117-8665-deae385c367f" target="_blank" style="color:#6fbf4c;">Озон Банк (анонимно)</a></div>
             `;
-            attachAuthEvents();
+            document.getElementById('showLogin')?.addEventListener('click', showLoginModal);
+            document.getElementById('showReg')?.addEventListener('click', showRegModal);
+            document.getElementById('logoutBtn')?.addEventListener('click', () => { currentUser = null; saveAll(); render('home'); });
         } 
         else if (page === 'forum') {
-            const categories = [
-                { id: 'news', name: '📢 Новости проекта', adminOnlyPost: true },
-                { id: 'staff_apps', name: '📝 Заявки на младшего администратора' },
-                { id: 'player_complaints', name: '⚠️ Жалобы на игроков' },
-                { id: 'admin_complaints', name: '👑 Жалобы на администраторов' },
-                { id: 'leader_complaints', name: '🏛️ Жалобы на лидеров' },
-                { id: 'general', name: '💬 Общий раздел' }
+            const cats = [
+                { id: 'news', name: '📢 Новости' }, { id: 'staff', name: '📝 Заявки в админы' },
+                { id: 'player', name: '⚠️ Жалобы на игроков' }, { id: 'admin', name: '👑 Жалобы на админов' },
+                { id: 'leader', name: '🏛️ Жалобы на лидеров' }, { id: 'general', name: '💬 Общий раздел' }
             ];
-            let html = `<div style="display:flex; justify-content:space-between; margin:1rem 0;"><h2><i class="fas fa-comments"></i> Форум Green Russia</h2>${currentUser ? `<button id="globalCreateTopicBtn" class="btn-create"><i class="fas fa-plus"></i> Создать тему</button>` : ''}</div>`;
-            for (let cat of categories) {
-                const topicsList = forumTopics.filter(t => t.category === cat.id);
+            let html = `<h2>Форум</h2>${currentUser ? '<button class="btn" id="newTopicBtn">+ Создать тему</button>' : '<p>Войдите, чтобы создать тему</p>'}`;
+            for (let cat of cats) {
+                let catTopics = topics.filter(t => t.cat === cat.id);
                 html += `<div class="forum-category"><h3>${cat.name}</h3>`;
-                if (topicsList.length === 0) html += `<p style="padding:10px;">Пока нет тем.</p>`;
-                for (let topic of topicsList) {
-                    const repliesCount = forumReplies[topic.id] ? forumReplies[topic.id].length : 0;
-                    html += `<div class="topic-item" data-topicid="${topic.id}">
-                                <div><span class="topic-title">${topic.title}</span><div class="topic-meta">Автор: ${topic.author} | ${topic.date} | Ответов: ${repliesCount}</div></div>
-                                <div><button class="viewTopicBtn" data-id="${topic.id}">Открыть</button></div>
-                            </div>`;
+                if (catTopics.length === 0) html += `<p>Нет тем</p>`;
+                for (let t of catTopics) {
+                    let replyCount = replies[t.id] ? replies[t.id].length : 0;
+                    html += `<div class="topic-item" data-id="${t.id}"><span><b>${t.title}</b><br><small>${t.author} | ${t.date} | ответов: ${replyCount}</small></span><span>→</span></div>`;
                 }
                 html += `</div>`;
             }
-            root.innerHTML = html;
-            document.querySelectorAll('.viewTopicBtn').forEach(btn => {
-                btn.addEventListener('click', (e) => { const id = parseInt(btn.dataset.id); showTopicModal(id); });
+            app.innerHTML = html;
+            document.querySelectorAll('.topic-item').forEach(el => {
+                el.addEventListener('click', () => showTopic(parseInt(el.dataset.id)));
             });
-            document.getElementById('globalCreateTopicBtn')?.addEventListener('click', () => showCreateTopicModal());
-        } 
+            document.getElementById('newTopicBtn')?.addEventListener('click', showNewTopicModal);
+        }
         else if (page === 'profile') {
-            if (!currentUser) { renderApp('home'); return; }
-            root.innerHTML = `<div style="background:#0f1f0c; border-radius:32px; padding:2rem; margin-top:2rem;"><h2><i class="fas fa-user-circle"></i> Профиль</h2><p><strong>Логин:</strong> ${currentUser.login}</p><p><strong>Роль:</strong> ${currentUser.role === 'admin' ? 'Администратор' : 'Игрок'}</p><p><strong>Сервер:</strong> Moscow</p><button id="logoutProfileBtn" class="btn-create">Выйти из аккаунта</button></div>`;
-            document.getElementById('logoutProfileBtn')?.addEventListener('click', () => { logout(); renderApp('home'); });
+            if (!currentUser) { render('home'); return; }
+            app.innerHTML = `<div class="card"><h2>Профиль</h2><p>Логин: ${currentUser.login}</p><p>Роль: ${currentUser.role === 'admin' ? 'Администратор' : 'Игрок'}</p><button class="btn" id="logoutProfile">Выйти</button></div>`;
+            document.getElementById('logoutProfile')?.addEventListener('click', () => { currentUser = null; saveAll(); render('home'); });
         }
     }
 
-    function showTopicModal(topicId) {
-        const topic = forumTopics.find(t => t.id === topicId);
+    function showTopic(id) {
+        let topic = topics.find(t => t.id === id);
         if (!topic) return;
-        const replies = forumReplies[topicId] || [];
-        let modalHtml = `
-            <div class="modal" id="topicModal" style="display:flex;">
-                <div class="modal-content" style="max-width:600px; max-height:80vh; overflow-y:auto;">
-                    <h3>${topic.title}</h3>
-                    <p><small>Автор: ${topic.author} | ${topic.date}</small></p>
-                    <p>${topic.content || 'Текст не указан'}</p>
-                    <hr><h4>Ответы:</h4>
-                    <div id="repliesList">${replies.length ? replies.map(r => `<div style="border-left:2px solid #6fbf4c; margin:8px 0; padding:8px;"><b>${r.author}</b>: ${r.text}<br><small>${r.date}</small></div>`).join('') : '<p>Нет ответов</p>'}</div>
-                    ${currentUser ? `<textarea id="replyText" placeholder="Ваш ответ..." rows="2" style="width:100%; margin:10px 0;"></textarea><button id="sendReplyBtn" class="btn-create">Ответить</button>` : '<p><i class="fas fa-lock"></i> Войдите, чтобы ответить</p>'}
-                    <button id="closeTopicModal" style="margin-top:10px; background:#333;">Закрыть</button>
-                </div>
-            </div>
-        `;
-        document.body.insertAdjacentHTML('beforeend', modalHtml);
-        document.getElementById('sendReplyBtn')?.addEventListener('click', () => {
-            const text = document.getElementById('replyText').value;
-            if (!text.trim()) return alert('Введите текст');
-            const newReply = { author: currentUser.login, text: text, date: new Date().toLocaleString() };
-            if (!forumReplies[topicId]) forumReplies[topicId] = [];
-            forumReplies[topicId].push(newReply);
+        let topicReplies = replies[id] || [];
+        let html = `<div class="modal" id="topicModal" style="display:flex;"><div class="modal-content"><h3>${topic.title}</h3><p><small>${topic.author} | ${topic.date}</small></p><p>${topic.content || ''}</p><hr><h4>Ответы</h4><div id="repliesBox">`;
+        topicReplies.forEach(r => { html += `<div><b>${r.author}</b>: ${r.text}<br><small>${r.date}</small></div><hr>`; });
+        html += `</div>${currentUser ? '<textarea id="replyText" rows="2" placeholder="Ваш ответ..."></textarea><button class="btn" id="sendReply">Ответить</button>' : '<p>Войдите, чтобы ответить</p>'}<button id="closeModal" class="btn">Закрыть</button></div></div>`;
+        document.body.insertAdjacentHTML('beforeend', html);
+        document.getElementById('sendReply')?.addEventListener('click', () => {
+            let text = document.getElementById('replyText').value.trim();
+            if (!text) return;
+            if (!replies[id]) replies[id] = [];
+            replies[id].push({ author: currentUser.login, text: text, date: new Date().toLocaleString() });
             saveAll();
-            document.getElementById('topicModal')?.remove();
-            showTopicModal(topicId);
+            document.getElementById('topicModal').remove();
+            showTopic(id);
         });
-        document.getElementById('closeTopicModal')?.addEventListener('click', () => document.getElementById('topicModal')?.remove());
+        document.getElementById('closeModal').onclick = () => document.getElementById('topicModal').remove();
     }
 
-    function showCreateTopicModal() {
-        if (!currentUser) return alert('Сначала войдите в аккаунт');
-        const categories = [
-            { id: 'news', name: '📢 Новости проекта', adminOnlyPost: true },
-            { id: 'staff_apps', name: '📝 Заявки на младшего администратора' },
-            { id: 'player_complaints', name: '⚠️ Жалобы на игроков' },
-            { id: 'admin_complaints', name: '👑 Жалобы на администраторов' },
-            { id: 'leader_complaints', name: '🏛️ Жалобы на лидеров' },
-            { id: 'general', name: '💬 Общий раздел' }
-        ];
-        let catOptions = categories.map(c => `<option value="${c.id}" ${c.adminOnlyPost && !isAdmin() ? 'disabled' : ''}>${c.name} ${c.adminOnlyPost && !isAdmin() ? '(только админ)' : ''}</option>`).join('');
-        let html = `
-            <div class="modal" id="createModal" style="display:flex;">
-                <div class="modal-content">
-                    <h3>Создать тему</h3>
-                    <select id="topicCategory">${catOptions}</select>
-                    <input type="text" id="topicTitle" placeholder="Заголовок">
-                    <textarea id="topicContent" placeholder="Содержание..." rows="4"></textarea>
-                    <div style="display:flex; gap:10px; margin-top:15px;">
-                        <button id="submitTopicBtn" class="btn-create">Опубликовать</button>
-                        <button id="cancelTopicBtn">Отмена</button>
-                    </div>
-                </div>
-            </div>
-        `;
+    function showNewTopicModal() {
+        if (!currentUser) return;
+        let cats = [{ id: 'news', name: 'Новости' }, { id: 'staff', name: 'Заявки' }, { id: 'player', name: 'Жалобы игроков' }, { id: 'admin', name: 'Жалобы админов' }, { id: 'leader', name: 'Жалобы лидеров' }, { id: 'general', name: 'Общий' }];
+        let options = cats.map(c => `<option value="${c.id}" ${c.id === 'news' && !isAdmin() ? 'disabled' : ''}>${c.name}${c.id === 'news' && !isAdmin() ? ' (только админ)' : ''}</option>`).join('');
+        let html = `<div class="modal" id="newTopicModal" style="display:flex;"><div class="modal-content"><h3>Новая тема</h3><select id="catSelect">${options}</select><input id="titleInput" placeholder="Заголовок"><textarea id="contentInput" rows="3" placeholder="Содержание..."></textarea><button class="btn" id="createTopic">Создать</button><button id="cancelTopic" class="btn">Отмена</button></div></div>`;
         document.body.insertAdjacentHTML('beforeend', html);
-        document.getElementById('submitTopicBtn').onclick = () => {
-            const category = document.getElementById('topicCategory').value;
-            const title = document.getElementById('topicTitle').value.trim();
-            const content = document.getElementById('topicContent').value.trim();
+        document.getElementById('createTopic').onclick = () => {
+            let cat = document.getElementById('catSelect').value;
+            let title = document.getElementById('titleInput').value.trim();
             if (!title) return alert('Введите заголовок');
-            if (category === 'news' && !isAdmin()) return alert('Только администратор может создавать новости');
-            const newTopic = {
-                id: Date.now(),
-                title: title,
-                category: category,
-                author: currentUser.login,
-                date: new Date().toLocaleDateString(),
-                content: content || '—'
-            };
-            forumTopics.push(newTopic);
+            if (cat === 'news' && !isAdmin()) return alert('Новости может создавать только админ');
+            topics.unshift({ id: Date.now(), cat: cat, title: title, content: document.getElementById('contentInput').value, author: currentUser.login, date: new Date().toLocaleString() });
             saveAll();
-            document.getElementById('createModal').remove();
-            renderApp('forum');
+            document.getElementById('newTopicModal').remove();
+            render('forum');
         };
-        document.getElementById('cancelTopicBtn').onclick = () => document.getElementById('createModal').remove();
+        document.getElementById('cancelTopic').onclick = () => document.getElementById('newTopicModal').remove();
     }
 
     function showLoginModal() {
-        let modalDiv = document.createElement('div'); modalDiv.className = 'modal'; modalDiv.style.display = 'flex';
-        modalDiv.innerHTML = `<div class="modal-content"><h3>Вход</h3><input id="loginName" placeholder="Логин"><input id="loginPass" type="password" placeholder="Пароль"><button id="doLoginBtn" style="margin:10px 0;">Войти</button><button id="closeLoginBtn">Отмена</button></div>`;
-        document.body.appendChild(modalDiv);
-        document.getElementById('doLoginBtn').onclick = () => {
-            const login = document.getElementById('loginName').value;
-            const pass = document.getElementById('loginPass').value;
-            const user = users.find(u => u.login === login && u.password === pass);
-            if (user) { currentUser = { login: user.login, role: user.role }; localStorage.setItem('gr_currentUser', JSON.stringify(currentUser)); modalDiv.remove(); renderApp('home'); }
-            else alert('Неверный логин или пароль');
+        let html = `<div class="modal" id="loginModal" style="display:flex;"><div class="modal-content"><h3>Вход</h3><input id="loginUser" placeholder="Логин"><input id="passUser" type="password" placeholder="Пароль"><button class="btn" id="doLogin">Войти</button><button id="closeLogin" class="btn">Отмена</button></div></div>`;
+        document.body.insertAdjacentHTML('beforeend', html);
+        document.getElementById('doLogin').onclick = () => {
+            let login = document.getElementById('loginUser').value;
+            let pass = document.getElementById('passUser').value;
+            let user = users.find(u => u.login === login && u.password === pass);
+            if (user) { currentUser = { login: user.login, role: user.role }; saveAll(); render('home'); document.getElementById('loginModal').remove(); }
+            else alert('Неверно');
         };
-        document.getElementById('closeLoginBtn').onclick = () => modalDiv.remove();
+        document.getElementById('closeLogin').onclick = () => document.getElementById('loginModal').remove();
     }
 
-    function showRegisterModal() {
-        let modalDiv = document.createElement('div'); modalDiv.className = 'modal'; modalDiv.style.display = 'flex';
-        modalDiv.innerHTML = `<div class="modal-content"><h3>Регистрация</h3><input id="regLogin" placeholder="Логин"><input id="regPass" type="password" placeholder="Пароль"><input id="regPass2" type="password" placeholder="Повтор пароля"><button id="doRegBtn">Зарегистрироваться</button><button id="closeRegBtn">Отмена</button></div>`;
-        document.body.appendChild(modalDiv);
-        document.getElementById('doRegBtn').onclick = () => {
-            const login = document.getElementById('regLogin').value.trim();
-            const pass = document.getElementById('regPass').value;
-            const pass2 = document.getElementById('regPass2').value;
-            if (!login || !pass) return alert('Заполните поля');
+    function showRegModal() {
+        let html = `<div class="modal" id="regModal" style="display:flex;"><div class="modal-content"><h3>Регистрация</h3><input id="regLogin" placeholder="Логин"><input id="regPass" type="password" placeholder="Пароль"><input id="regPass2" type="password" placeholder="Повтор"><button class="btn" id="doReg">Зарегистрироваться</button><button id="closeReg" class="btn">Отмена</button></div></div>`;
+        document.body.insertAdjacentHTML('beforeend', html);
+        document.getElementById('doReg').onclick = () => {
+            let login = document.getElementById('regLogin').value.trim();
+            let pass = document.getElementById('regPass').value;
+            let pass2 = document.getElementById('regPass2').value;
+            if (!login || !pass) return alert('Заполните все');
             if (pass !== pass2) return alert('Пароли не совпадают');
-            if (users.find(u => u.login === login)) return alert
+            if (users.find(u => u.login === login)) return alert('Логин занят');
+            users.push({ login, password: pass, role: 'user' });
+            saveAll();
+            alert('Успешно! Теперь войдите');
+            document.getElementById('regModal').remove();
+            showLoginModal();
+        };
+        document.getElementById('closeReg').onclick = () => document.getElementById('regModal').remove();
+    }
+
+    document.getElementById('menuToggle').onclick = () => document.getElementById('sidebar').classList.add('open');
+    document.getElementById('closeSidebar').onclick = () => document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('navHome').onclick = (e) => { e.preventDefault(); render('home'); document.getElementById('sidebar').classList.remove('open'); };
+    document.getElementById('navForum').onclick = (e) => { e.preventDefault(); render('forum'); document.getElementById('sidebar').classList.remove('open'); };
+    document.getElementById('navProfile').onclick = (e) => { e.preventDefault(); render('profile'); document.getElementById('sidebar').classList.remove('open'); };
+    document.getElementById('navLogout').onclick = (e) => { e.preventDefault(); currentUser = null; saveAll(); render('home'); document.getElementById('sidebar').classList.remove('open'); };
+    render('home');
+</script>
+</body>
+</html>
