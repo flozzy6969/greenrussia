@@ -2,248 +2,139 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Green Russia — официальный сайт и форум</title>
+    <title>Green Russia — официальный сайт</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box;}
-        body{background:radial-gradient(circle at 10%20%,#0a1f0e,#030a05);font-family:sans-serif;color:#eef5e9;}
-        .sidebar{position:fixed;top:0;left:-260px;width:260px;height:100%;background:#0a1a08;border-right:1px solid #6fbf4c;transition:0.3s;padding:20px;z-index:1000;}
-        .sidebar.open{left:0;}
-        .menu-toggle{position:fixed;top:15px;left:15px;background:#000000aa;border:1px solid #6fbf4c;border-radius:12px;padding:8px 12px;cursor:pointer;z-index:1001;color:#6fbf4c;font-size:24px;}
-        .close-sidebar{float:right;background:none;border:none;color:#fff;font-size:24px;cursor:pointer;}
-        .sidebar-menu{list-style:none;margin-top:40px;}
-        .sidebar-menu li{margin:20px 0;}
-        .sidebar-menu a{color:#fff;text-decoration:none;font-size:18px;}
-        .wrapper{max-width:1200px;margin:0 auto;padding:70px 20px 20px;}
+        body{background:radial-gradient(circle at 10%20%,#0a1f0e,#030a05);font-family:sans-serif;color:#eef5e9;line-height:1.4;}
+        .wrapper{max-width:1200px;margin:0 auto;padding:20px;}
         .hero{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-bottom:30px;}
-        .bear-icon{font-size:48px;}
-        .title h1{background:linear-gradient(135deg,#c4ff9e,#6fbf4c);-webkit-background-clip:text;background-clip:text;color:transparent;}
-        .card{background:#0f1f0c;border-radius:24px;padding:20px;margin:15px 0;border:1px solid #2c5a1f;}
-        .btn{background:#6fbf4c;border:none;padding:10px 20px;border-radius:40px;font-weight:bold;cursor:pointer;margin:5px;color:#071a05;}
-        .forum-category{background:#0f1f0c;border-radius:24px;padding:15px;margin-bottom:20px;}
-        .topic-item{background:#1a2a16;padding:12px;border-radius:20px;margin:8px 0;display:flex;justify-content:space-between;flex-wrap:wrap;cursor:pointer;}
-        .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#000000cc;justify-content:center;align-items:center;z-index:1100;}
-        .modal-content{background:#121f0e;padding:20px;border-radius:28px;width:90%;max-width:500px;}
-        input,textarea,select{width:100%;margin:8px 0;padding:10px;background:#1b2b16;border:1px solid #2c5a1f;border-radius:28px;color:#fff;}
-        footer{text-align:center;margin-top:40px;padding:20px;border-top:1px solid #2c4b21;}
-        .ref-stat{background:#1a2a16;border-radius:20px;padding:12px;margin-top:15px;}
-        .ref-link{background:#071a05;padding:8px;border-radius:30px;word-break:break-all;font-family:monospace;margin:8px 0;font-size:12px;}
-        .copy-btn{background:#2c5a1f;border:none;padding:4px 12px;border-radius:20px;color:#fff;cursor:pointer;}
-        .player-count{font-size:32px;font-weight:bold;color:#6fbf4c;}
+        .bear-icon{font-size:64px;filter:drop-shadow(0 0 8px #6fbf4c);}
+        .title h1{font-size:2.5rem;background:linear-gradient(135deg,#c4ff9e,#6fbf4c);-webkit-background-clip:text;background-clip:text;color:transparent;}
+        .card{background:#0f1f0c;border-radius:28px;padding:24px;margin:20px 0;border:1px solid #2c5a1f;}
+        .btn{background:#6fbf4c;border:none;padding:12px 24px;border-radius:60px;font-weight:bold;cursor:pointer;margin:5px;display:inline-flex;align-items:center;gap:8px;color:#071a05;font-size:1rem;}
+        .btn-donate{background:linear-gradient(135deg,#ff9800,#ff5722);color:white;}
+        .ref-link{background:#071a05;padding:12px;border-radius:30px;word-break:break-all;margin:15px 0;font-family:monospace;font-size:12px;}
+        .bonus-list{background:#1a2a16;border-radius:24px;padding:18px;margin-top:15px;}
+        .bonus-item{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #2c5a1f;}
+        .footer{text-align:center;margin-top:40px;padding:20px;border-top:1px solid #2c4b21;font-size:0.8rem;}
+        .green-text{color:#6fbf4c;font-weight:bold;}
+        .flex-between{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;}
+        i{margin-right:8px;}
+        .invite-count{font-size:28px;font-weight:bold;color:#6fbf4c;}
+        @media (max-width:720px){.hero{flex-direction:column;text-align:center;gap:15px;}}
+        .tg-link{background:#0088cc;display:inline-block;padding:8px 20px;border-radius:40px;margin-top:10px;color:white;text-decoration:none;}
     </style>
 </head>
 <body>
 
-<div class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
-<div class="sidebar" id="sidebar">
-    <button class="close-sidebar" id="closeSidebar">&times;</button>
-    <ul class="sidebar-menu">
-        <li><a href="#" id="navHome"><i class="fas fa-home"></i> Главная</a></li>
-        <li><a href="#" id="navForum"><i class="fas fa-comments"></i> Форум</a></li>
-        <li><a href="#" id="navProfile"><i class="fas fa-user"></i> Профиль</a></li>
-        <li><a href="#" id="navReferrals"><i class="fas fa-users"></i> Рефералы</a></li>
-        <li><a href="#" id="navLogout"><i class="fas fa-sign-out-alt"></i> Выйти</a></li>
-    </ul>
-    <hr style="margin:20px 0;">
-    <div style="text-align:center;">Сервер <strong>Moscow</strong><br>🐻 Green Russia</div>
+<div class="wrapper">
+    <div class="hero">
+        <div class="flex-between" style="gap:20px;">
+            <div class="bear-icon">🐻‍❄️🐻</div>
+            <div class="title"><h1>GREEN RUSSIA</h1><p>Ролевая игра на сервере Moscow</p></div>
+        </div>
+        <div></div>
+    </div>
+
+    <div class="card" id="refBlock">
+        <h2><i class="fas fa-user-plus"></i> Твоя реферальная ссылка</h2>
+        <p>Кидай ссылку друзьям. За каждого приглашённого ты получаешь бонусы в игре!</p>
+        <div class="ref-link" id="refLink">Загрузка...</div>
+        <button class="btn" id="copyRefBtn"><i class="fas fa-copy"></i> Скопировать ссылку</button>
+        
+        <div style="margin-top:20px; text-align:center;">
+            <span style="font-size:18px;">👥 Приглашено друзей:</span>
+            <div class="invite-count" id="inviteCount">0</div>
+        </div>
+
+        <div class="bonus-list">
+            <h3>🎁 Бонусы за приглашённых друзей:</h3>
+            <div class="bonus-item"><span>1 друг</span><span class="green-text">5.000.000 игровой валюты</span></div>
+            <div class="bonus-item"><span>3 друга</span><span class="green-text">50.000.000 игровой валюты</span></div>
+            <div class="bonus-item"><span>10 друзей</span><span class="green-text">100.000.000 игровой валюты</span></div>
+            <div class="bonus-item"><span>25 друзей</span><span class="green-text">500.000.000 игровой валюты</span></div>
+        </div>
+        
+        <div style="margin-top:20px; text-align:center;">
+            <p>📢 <strong>Как получить бонус?</strong> Напиши создателю проекта в Telegram: <br>
+            <a href="https://t.me/wflossy" target="_blank" class="tg-link"><i class="fab fa-telegram"></i> @wflossy</a>
+            </p>
+            <p style="font-size:12px; margin-top:10px;">Укажи свой ник и сколько друзей пригласил. Бонус выдадут в игре!</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2><i class="fas fa-download"></i> Скачать игру</h2>
+        <a href="https://disk.yandex.ru/d/2lTyrQzPeNO03Q" target="_blank"><button class="btn"><i class="fab fa-android"></i> GreenRussia.apk (32 МБ)</button></a>
+        <p style="margin-top:10px;"><small>Для iPhone: установите X8 Sandbox из App Store, внутри эмулятора скачайте APK</small></p>
+    </div>
+
+    <div class="card">
+        <h2><i class="fas fa-heart"></i> Поддержать проект</h2>
+        <a href="https://finance.ozon.ru/apps/sbp/ozonbankpay/019bfe74-6fa5-7117-8665-deae385c367f" target="_blank"><button class="btn btn-donate"><i class="fas fa-heart"></i> Озон Банк (анонимно)</button></a>
+    </div>
+
+    <div class="footer">Green Russia — официальный сайт | flozzy6969.github.io/greenrussia</div>
 </div>
 
-<div class="wrapper" id="app"></div>
-<footer>Green Russia — официальный сайт и форум | flozzy6969.github.io/greenrussia</footer>
-
 <script>
-    // ========== НАСТРОЙКИ (МЕНЯЙ ЗДЕСЬ!) ==========
-    let REAL_PLAYERS_COUNT = 0;  // СЮДА ПИШИ РЕАЛЬНОЕ КОЛИЧЕСТВО ИГРОКОВ НА СЕРВЕРЕ
-    // =============================================
-
-    let users = JSON.parse(localStorage.getItem('gr_users')) || [];
-    let topics = JSON.parse(localStorage.getItem('gr_topics')) || [];
-    let replies = JSON.parse(localStorage.getItem('gr_replies')) || {};
-    let currentUser = localStorage.getItem('gr_user') ? JSON.parse(localStorage.getItem('gr_user')) : null;
-
-    const adminLogin = "Daniil_Werty (Создатель)";
-    const adminPass = "54535251";
-    if (!users.find(u => u.login === adminLogin)) {
-        users.push({ login: adminLogin, password: adminPass, role: "admin", referrer: null, invited: [] });
-    }
-    saveAll();
-
-    function saveAll() {
-        localStorage.setItem('gr_users', JSON.stringify(users));
-        localStorage.setItem('gr_topics', JSON.stringify(topics));
-        localStorage.setItem('gr_replies', JSON.stringify(replies));
-        if (currentUser) localStorage.setItem('gr_user', JSON.stringify(currentUser));
-        else localStorage.removeItem('gr_user');
+    // Генерируем уникальный ID для пользователя (хранится в браузере)
+    let userId = localStorage.getItem('gr_userId');
+    if (!userId) {
+        userId = 'user_' + Math.random().toString(36).substr(2, 16);
+        localStorage.setItem('gr_userId', userId);
     }
 
-    function isAdmin() { return currentUser && currentUser.role === "admin"; }
+    // Загружаем счётчик приглашённых
+    let invites = JSON.parse(localStorage.getItem('gr_invites')) || {};
+    let myInvites = invites[userId] || [];
 
-    // Обработка реферальной ссылки
+    // Функция сохранения
+    function saveInvites() {
+        invites[userId] = myInvites;
+        localStorage.setItem('gr_invites', JSON.stringify(invites));
+        document.getElementById('inviteCount').innerText = myInvites.length;
+    }
+
+    // Обработка перехода по реферальной ссылке
     function handleReferral() {
         const urlParams = new URLSearchParams(window.location.search);
         const ref = urlParams.get('ref');
-        if (ref && !currentUser) {
-            localStorage.setItem('pendingReferral', ref);
-        }
-    }
-
-    function render(page) {
-        const app = document.getElementById('app');
-        if (page === 'home') {
-            app.innerHTML = `
-                <div class="hero">
-                    <div><div class="bear-icon">🐻‍❄️🐻</div><div class="title"><h1>GREEN RUSSIA</h1><p>Ролевая игра на сервере Moscow</p></div></div>
-                    <div>${!currentUser ? '<button class="btn" id="showLogin">Вход</button><button class="btn" id="showReg">Регистрация</button>' : `<span style="background:#2c5a1f; padding:8px 16px; border-radius:40px;">${currentUser.login}</span><button class="btn" id="logoutBtn">Выйти</button>`}</div>
-                </div>
-                <div class="card" style="text-align:center;">
-                    <i class="fas fa-users" style="font-size:48px;"></i>
-                    <div class="player-count">${REAL_PLAYERS_COUNT}</div>
-                    <div>игроков онлайн</div>
-                </div>
-                <div class="card"><i class="fas fa-download"></i> <strong>Скачать APK (32 МБ)</strong><br><a href="https://disk.yandex.ru/d/2lTyrQzPeNO03Q" target="_blank" style="color:#6fbf4c;">Ссылка на Яндекс.Диск</a><br><small>Для iPhone: X8 Sandbox (App Store)</small></div>
-                <div class="card"><i class="fas fa-heart"></i> <strong>Поддержать проект</strong><br><a href="https://finance.ozon.ru/apps/sbp/ozonbankpay/019bfe74-6fa5-7117-8665-deae385c367f" target="_blank" style="color:#6fbf4c;">Озон Банк (анонимно)</a></div>
-            `;
-            document.getElementById('showLogin')?.addEventListener('click', showLoginModal);
-            document.getElementById('showReg')?.addEventListener('click', showRegModal);
-            document.getElementById('logoutBtn')?.addEventListener('click', () => { currentUser = null; saveAll(); render('home'); });
-        } 
-        else if (page === 'forum') {
-            const cats = [
-                { id: 'news', name: '📢 Новости' }, { id: 'staff', name: '📝 Заявки в админы' },
-                { id: 'player', name: '⚠️ Жалобы на игроков' }, { id: 'admin', name: '👑 Жалобы на админов' },
-                { id: 'leader', name: '🏛️ Жалобы на лидеров' }, { id: 'general', name: '💬 Общий раздел' }
-            ];
-            let html = `<h2>Форум</h2>${currentUser ? '<button class="btn" id="newTopicBtn">+ Создать тему</button>' : '<p>Войдите, чтобы создать тему</p>'}`;
-            for (let cat of cats) {
-                let catTopics = topics.filter(t => t.cat === cat.id);
-                html += `<div class="forum-category"><h3>${cat.name}</h3>`;
-                if (catTopics.length === 0) html += `<p>Нет тем</p>`;
-                for (let t of catTopics) {
-                    let replyCount = replies[t.id] ? replies[t.id].length : 0;
-                    html += `<div class="topic-item" data-id="${t.id}"><span><b>${t.title}</b><br><small>${t.author} | ${t.date} | ответов: ${replyCount}</small></span><span>→</span></div>`;
-                }
-                html += `</div>`;
+        if (ref && ref !== userId) {
+            // Добавляем приглашённого, если его ещё нет
+            if (!invites[ref]) invites[ref] = [];
+            if (!invites[ref].includes(userId)) {
+                invites[ref].push(userId);
+                localStorage.setItem('gr_invites', JSON.stringify(invites));
             }
-            app.innerHTML = html;
-            document.querySelectorAll('.topic-item').forEach(el => {
-                el.addEventListener('click', () => showTopic(parseInt(el.dataset.id)));
-            });
-            document.getElementById('newTopicBtn')?.addEventListener('click', showNewTopicModal);
-        }
-        else if (page === 'profile') {
-            if (!currentUser) { render('home'); return; }
-            const userData = users.find(u => u.login === currentUser.login);
-            const invitedCount = userData?.invited?.length || 0;
-            app.innerHTML = `<div class="card"><h2>Профиль</h2><p>Логин: ${currentUser.login}</p><p>Роль: ${currentUser.role === 'admin' ? 'Администратор' : 'Игрок'}</p><p>Приглашено друзей: <strong>${invitedCount}</strong></p><button class="btn" id="logoutProfile">Выйти</button></div>`;
-            document.getElementById('logoutProfile')?.addEventListener('click', () => { currentUser = null; saveAll(); render('home'); });
-        }
-        else if (page === 'referrals') {
-            if (!currentUser) { render('home'); return; }
-            const userData = users.find(u => u.login === currentUser.login);
-            const myRefLink = `${window.location.origin}${window.location.pathname}?ref=${encodeURIComponent(currentUser.login)}`;
-            const invitedList = userData?.invited || [];
-            let invitedHtml = invitedList.length ? invitedList.map(nick => `<div>🎮 ${nick}</div>`).join('') : '<div>Пока никого не пригласили</div>';
-            app.innerHTML = `<div class="card"><h2><i class="fas fa-user-plus"></i> Реферальная программа</h2><p>Приводи друзей и помогай серверу расти!</p><div class="ref-stat"><strong>Твоя ссылка:</strong><div class="ref-link" id="refLinkSpan">${myRefLink}</div><button class="copy-btn" id="copyRefBtn"><i class="fas fa-copy"></i> Скопировать ссылку</button></div><div class="ref-stat"><strong>Кого ты пригласил (${invitedList.length}):</strong>${invitedHtml}</div></div><button class="btn" id="backHome">На главную</button>`;
-            document.getElementById('copyRefBtn')?.addEventListener('click', () => {
-                navigator.clipboard.writeText(myRefLink);
-                alert('Ссылка скопирована!');
-            });
-            document.getElementById('backHome')?.addEventListener('click', () => render('home'));
+            // Убираем ref из URL, чтобы не считать повторно
+            window.history.replaceState({}, '', window.location.pathname);
         }
     }
 
-    function showTopic(id) {
-        let topic = topics.find(t => t.id === id);
-        if (!topic) return;
-        let topicReplies = replies[id] || [];
-        let html = `<div class="modal" id="topicModal" style="display:flex;"><div class="modal-content"><h3>${topic.title}</h3><p><small>${topic.author} | ${topic.date}</small></p><p>${topic.content || ''}</p><hr><h4>Ответы</h4><div id="repliesBox">`;
-        topicReplies.forEach(r => { html += `<div><b>${r.author}</b>: ${r.text}<br><small>${r.date}</small></div><hr>`; });
-        html += `</div>${currentUser ? '<textarea id="replyText" rows="2" placeholder="Ваш ответ..."></textarea><button class="btn" id="sendReply">Ответить</button>' : '<p>Войдите, чтобы ответить</p>'}<button id="closeModal" class="btn">Закрыть</button></div></div>`;
-        document.body.insertAdjacentHTML('beforeend', html);
-        document.getElementById('sendReply')?.addEventListener('click', () => {
-            let text = document.getElementById('replyText').value.trim();
-            if (!text) return;
-            if (!replies[id]) replies[id] = [];
-            replies[id].push({ author: currentUser.login, text: text, date: new Date().toLocaleString() });
-            saveAll();
-            document.getElementById('topicModal').remove();
-            showTopic(id);
-        });
-        document.getElementById('closeModal').onclick = () => document.getElementById('topicModal').remove();
+    // Отображаем ссылку
+    function updateRefLink() {
+        const link = `${window.location.origin}${window.location.pathname}?ref=${userId}`;
+        document.getElementById('refLink').innerText = link;
     }
 
-    function showNewTopicModal() {
-        if (!currentUser) return;
-        let cats = [{ id: 'news', name: 'Новости' }, { id: 'staff', name: 'Заявки' }, { id: 'player', name: 'Жалобы игроков' }, { id: 'admin', name: 'Жалобы админов' }, { id: 'leader', name: 'Жалобы лидеров' }, { id: 'general', name: 'Общий' }];
-        let options = cats.map(c => `<option value="${c.id}" ${c.id === 'news' && !isAdmin() ? 'disabled' : ''}>${c.name}${c.id === 'news' && !isAdmin() ? ' (только админ)' : ''}</option>`).join('');
-        let html = `<div class="modal" id="newTopicModal" style="display:flex;"><div class="modal-content"><h3>Новая тема</h3><select id="catSelect">${options}</select><input id="titleInput" placeholder="Заголовок"><textarea id="contentInput" rows="3" placeholder="Содержание..."></textarea><button class="btn" id="createTopic">Создать</button><button id="cancelTopic" class="btn">Отмена</button></div></div>`;
-        document.body.insertAdjacentHTML('beforeend', html);
-        document.getElementById('createTopic').onclick = () => {
-            let cat = document.getElementById('catSelect').value;
-            let title = document.getElementById('titleInput').value.trim();
-            if (!title) return alert('Введите заголовок');
-            if (cat === 'news' && !isAdmin()) return alert('Новости может создавать только админ');
-            topics.unshift({ id: Date.now(), cat: cat, title: title, content: document.getElementById('contentInput').value, author: currentUser.login, date: new Date().toLocaleString() });
-            saveAll();
-            document.getElementById('newTopicModal').remove();
-            render('forum');
-        };
-        document.getElementById('cancelTopic').onclick = () => document.getElementById('newTopicModal').remove();
-    }
+    // Копирование ссылки
+    document.getElementById('copyRefBtn')?.addEventListener('click', () => {
+        const link = `${window.location.origin}${window.location.pathname}?ref=${userId}`;
+        navigator.clipboard.writeText(link);
+        alert('Ссылка скопирована! Кидай её друзьям.');
+    });
 
-    function showLoginModal() {
-        let html = `<div class="modal" id="loginModal" style="display:flex;"><div class="modal-content"><h3>Вход</h3><input id="loginUser" placeholder="Логин"><input id="passUser" type="password" placeholder="Пароль"><button class="btn" id="doLogin">Войти</button><button id="closeLogin" class="btn">Отмена</button></div></div>`;
-        document.body.insertAdjacentHTML('beforeend', html);
-        document.getElementById('doLogin').onclick = () => {
-            let login = document.getElementById('loginUser').value;
-            let pass = document.getElementById('passUser').value;
-            let user = users.find(u => u.login === login && u.password === pass);
-            if (user) { currentUser = { login: user.login, role: user.role }; saveAll(); render('home'); document.getElementById('loginModal').remove(); }
-            else alert('Неверный логин или пароль');
-        };
-        document.getElementById('closeLogin').onclick = () => document.getElementById('loginModal').remove();
-    }
-
-    function showRegModal() {
-        let html = `<div class="modal" id="regModal" style="display:flex;"><div class="modal-content"><h3>Регистрация</h3><input id="regLogin" placeholder="Логин"><input id="regPass" type="password" placeholder="Пароль"><input id="regPass2" type="password" placeholder="Повтор"><button class="btn" id="doReg">Зарегистрироваться</button><button id="closeReg" class="btn">Отмена</button></div></div>`;
-        document.body.insertAdjacentHTML('beforeend', html);
-        document.getElementById('doReg').onclick = () => {
-            let login = document.getElementById('regLogin').value.trim();
-            let pass = document.getElementById('regPass').value;
-            let pass2 = document.getElementById('regPass2').value;
-            if (!login || !pass) return alert('Заполните все поля');
-            if (pass !== pass2) return alert('Пароли не совпадают');
-            if (users.find(u => u.login === login)) return alert('Логин уже занят');
-            let pendingRef = localStorage.getItem('pendingReferral');
-            users.push({ login, password: pass, role: 'user', referrer: pendingRef || null, invited: [] });
-            if (pendingRef) {
-                let referrerUser = users.find(u => u.login === pendingRef);
-                if (referrerUser) {
-                    if (!referrerUser.invited) referrerUser.invited = [];
-                    referrerUser.invited.push(login);
-                    saveAll();
-                }
-                localStorage.removeItem('pendingReferral');
-            }
-            saveAll();
-            alert('Регистрация успешна! Теперь войдите.');
-            document.getElementById('regModal').remove();
-            showLoginModal();
-        };
-        document.getElementById('closeReg').onclick = () => document.getElementById('regModal').remove();
-    }
-
+    // Инициализация
     handleReferral();
-
-    document.getElementById('menuToggle').onclick = () => document.getElementById('sidebar').classList.add('open');
-    document.getElementById('closeSidebar').onclick = () => document.getElementById('sidebar').classList.remove('open');
-    document.getElementById('navHome').onclick = (e) => { e.preventDefault(); render('home'); document.getElementById('sidebar').classList.remove('open'); };
-    document.getElementById('navForum').onclick = (e) => { e.preventDefault(); render('forum'); document.getElementById('sidebar').classList.remove('open'); };
-    document.getElementById('navProfile').onclick = (e) => { e.preventDefault(); render('profile'); document.getElementById('sidebar').classList.remove('open'); };
-    document.getElementById('navReferrals').onclick = (e) => { e.preventDefault(); render('referrals'); document.getElementById('sidebar').classList.remove('open'); };
-    document.getElementById('navLogout').onclick = (e) => { e.preventDefault(); currentUser = null; saveAll(); render('home'); document.getElementById('sidebar').classList.remove('open'); };
-    render('home');
+    updateRefLink();
+    
+    // Обновляем счётчик для текущего пользователя (если менялось)
+    let currentInvites = invites[userId] || [];
+    myInvites = currentInvites;
+    saveInvites();
 </script>
 </body>
 </html>
