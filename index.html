@@ -3,36 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Green Russia — Криминальная RPG | Форум и APK</title>
+    <title>Green Russia — криминальная RPG | Скачать APK на Андроид</title>
+    <meta name="description" content="Green Russia — ролевая игра, где ты решаешь кем быть. Качай APK, вступай в семью, захватывай районы.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background: radial-gradient(circle at 10% 20%, #0a1f0e, #030a05);
             font-family: 'Inter', sans-serif;
             color: #eef5e9;
             line-height: 1.4;
         }
-
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjUiIG51bU9jdGF2ZXM9IjMiLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjZikiIG9wYWNpdHk9IjAuMDYiLz48L3N2Zz4=');
-            background-repeat: repeat;
-            pointer-events: none;
-            z-index: 0;
-        }
-
         .wrapper {
             position: relative;
             z-index: 2;
@@ -40,7 +22,6 @@
             margin: 0 auto;
             padding: 1.5rem 2rem 3rem;
         }
-
         .hero {
             display: flex;
             flex-wrap: wrap;
@@ -49,62 +30,30 @@
             margin-bottom: 3rem;
             padding: 1rem 0;
             border-bottom: 2px solid rgba(80, 180, 80, 0.4);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
-
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .bear-icon {
-            font-size: 4.5rem;
-            filter: drop-shadow(0 0 8px #6fbf4c);
-            transition: transform 0.2s ease;
-        }
-        .bear-icon:hover {
-            transform: scale(1.05);
-        }
-
+        .logo-area { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+        .bear-icon { font-size: 4.5rem; filter: drop-shadow(0 0 8px #6fbf4c); }
         .title h1 {
             font-size: 2.8rem;
             font-weight: 800;
-            letter-spacing: -0.02em;
             background: linear-gradient(135deg, #c4ff9e, #6fbf4c);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
-        .title p {
-            font-size: 0.9rem;
-            color: #b5d99c;
-            letter-spacing: 1px;
-        }
-
         .stats-badge {
             background: rgba(0,0,0,0.65);
             backdrop-filter: blur(8px);
             padding: 0.6rem 1.2rem;
             border-radius: 60px;
             border-left: 4px solid #6fbf4c;
-            font-weight: 600;
-            font-size: 0.9rem;
         }
-        .stats-badge i {
-            color: #6fbf4c;
-            margin-right: 8px;
-        }
-
         .card-grid {
             display: flex;
             flex-wrap: wrap;
             gap: 2rem;
             margin: 3rem 0;
         }
-
         .card {
             flex: 1;
             min-width: 260px;
@@ -113,63 +62,21 @@
             border-radius: 32px;
             border: 1px solid rgba(111, 191, 76, 0.4);
             padding: 1.6rem;
-            transition: all 0.25s;
-            box-shadow: 0 20px 35px -12px black;
+            transition: 0.25s;
         }
-        .card:hover {
-            border-color: #8bdc6e;
-            transform: translateY(-5px);
-            background: rgba(15, 30, 10, 0.85);
-        }
-        .card i {
-            font-size: 2.4rem;
-            color: #8bdc6e;
-            margin-bottom: 1rem;
-        }
-        .card h3 {
-            font-size: 1.7rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-        }
-        .card p {
-            color: #cfebc2;
-            font-weight: 400;
-        }
-
+        .card:hover { border-color: #8bdc6e; transform: translateY(-5px); }
+        .card i { font-size: 2.4rem; color: #8bdc6e; margin-bottom: 1rem; }
+        .card h3 { font-size: 1.7rem; font-weight: 700; margin-bottom: 0.75rem; }
         .apk-section {
             background: linear-gradient(125deg, #0f2a0b, #071a05);
             border-radius: 48px;
-            padding: 2rem 2rem 2rem 2.5rem;
+            padding: 2rem;
             margin: 3rem 0;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
             border: 1px solid #6fbf4c;
-            box-shadow: 0 0 25px rgba(111,191,76,0.3);
-        }
-        .apk-info {
-            flex: 2;
-        }
-        .apk-info h2 {
-            font-size: 2rem;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .apk-badge {
-            background: #2c5a1f;
-            padding: 0.3rem 1rem;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-        .download-area {
-            flex: 1;
-            min-width: 240px;
-            text-align: center;
         }
         .btn-apk {
             background: #6fbf4c;
@@ -182,22 +89,7 @@
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            transition: 0.2s;
             cursor: pointer;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            width: 100%;
-            justify-content: center;
-        }
-        .btn-apk:hover {
-            background: #87d462;
-            transform: scale(1.02);
-            box-shadow: 0 0 15px #6fbf4c;
-        }
-        
-        /* ДОНАТ КНОПКА */
-        .donate-section {
-            margin: 2rem 0;
-            text-align: center;
         }
         .btn-donate {
             background: linear-gradient(135deg, #ff9800, #ff5722);
@@ -210,15 +102,49 @@
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            transition: 0.2s;
             cursor: pointer;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            margin: 20px auto;
         }
-        .btn-donate:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 15px #ff9800;
+        /* НОВЫЙ БЛОК ДЛЯ IPHONE */
+        .ios-block {
+            background: linear-gradient(135deg, #1a2a1a, #0a1a0a);
+            border-radius: 48px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid #6fbf4c;
+            text-align: center;
         }
-
+        .ios-block h2 { font-size: 1.8rem; margin-bottom: 1rem; }
+        .ios-block h2 i { color: #fff; margin-right: 10px; }
+        .ios-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+        .ios-card {
+            background: rgba(0,0,0,0.5);
+            border-radius: 32px;
+            padding: 1.2rem;
+            width: 200px;
+            text-align: center;
+            transition: 0.2s;
+            border: 1px solid #3a6b2a;
+        }
+        .ios-card:hover { border-color: #6fbf4c; transform: scale(1.02); }
+        .ios-card i { font-size: 2.5rem; margin-bottom: 10px; }
+        .ios-card a {
+            background: #6fbf4c;
+            display: inline-block;
+            margin-top: 12px;
+            padding: 8px 16px;
+            border-radius: 40px;
+            color: #071a05;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
         .steps {
             background: rgba(0,0,0,0.4);
             border-radius: 32px;
@@ -229,11 +155,7 @@
             gap: 2rem;
             justify-content: center;
         }
-        .step {
-            text-align: center;
-            flex: 1;
-            min-width: 160px;
-        }
+        .step { text-align: center; flex: 1; min-width: 160px; }
         .step-number {
             background: #6fbf4c;
             width: 50px;
@@ -247,16 +169,13 @@
             color: #071a05;
             margin-bottom: 12px;
         }
-
         footer {
             margin-top: 3rem;
             text-align: center;
             font-size: 0.8rem;
             border-top: 1px solid #2c4b21;
             padding-top: 2rem;
-            color: #98c17e;
         }
-
         @media (max-width: 720px) {
             .wrapper { padding: 1rem; }
             .apk-section { flex-direction: column; text-align: center; gap: 20px; }
@@ -268,85 +187,54 @@
 <div class="wrapper">
     <div class="hero">
         <div class="logo-area">
-            <div class="bear-icon">
-                🐻‍❄️🐻
-                <i class="fas fa-paw" style="font-size: 2rem; margin-left: -10px; color:#6fbf4c;"></i>
-            </div>
+            <div class="bear-icon">🐻‍❄️🐻 <i class="fas fa-paw" style="color:#6fbf4c;"></i></div>
             <div class="title">
                 <h1>GREEN RUSSIA</h1>
-                <p>Ролевая игра, где ты решаешь кем стать — Хозяин тайги или Теневой босс. Прокачка, семья, районы.</p>
+                <p>Ролевая игра — выбери путь: одиночка или лидер семьи</p>
             </div>
         </div>
-        <div class="stats-badge">
-            <i class="fas fa-users"></i> 1 287 404 игроков <i class="fas fa-tree"></i> Медвежья сила
-        </div>
+        <div class="stats-badge"><i class="fas fa-users"></i> 1 287 404 игроков <i class="fas fa-tree"></i> Медвежья сила</div>
     </div>
 
     <div class="card-grid">
-        <div class="card">
-            <i class="fas fa-hand-fist"></i>
-            <h3>Вступай в семью</h3>
-            <p>Стань частью легендарного братства. Контролируй районы, защищай свою территорию и завоёвывай авторитет.</p>
-        </div>
-        <div class="card">
-            <i class="fas fa-map-marked-alt"></i>
-            <h3>Удерживай район</h3>
-            <p>Каждый квартал — битва за ресурсы. Строй экономику, найми бойцов и докажи, что Green Russia — твой дом.</p>
-        </div>
-        <div class="card">
-            <i class="fas fa-crown"></i>
-            <h3>Стань легендой</h3>
-            <p>Одиночка или лидер клана — выбирай путь. Развивай репутацию, становись теневым боссом или героем улиц.</p>
-        </div>
+        <div class="card"><i class="fas fa-hand-fist"></i><h3>Вступай в семью</h3><p>Контролируй районы, защищай территорию.</p></div>
+        <div class="card"><i class="fas fa-map-marked-alt"></i><h3>Удерживай район</h3><p>Битва за ресурсы, строй экономику.</p></div>
+        <div class="card"><i class="fas fa-crown"></i><h3>Стань легендой</h3><p>Одиночка или лидер — выбирай.</p></div>
     </div>
 
-    <div class="apk-section" id="apkBlock">
-        <div class="apk-info">
-            <h2><i class="fab fa-android"></i> GREEN RUSSIA APK <span class="apk-badge">Версия 3.2.0 | 78 MB</span></h2>
-            <p style="margin: 12px 0 0 0;">Качай официальный клиент и становись частью криминальной вселенной. Эксклюзивные скины «Бурый медведь», уникальные тачки и оружие только в APK.</p>
-            <div class="apk-meta"><i class="fas fa-shield-alt"></i> Античит | Онлайн 24/7 | Без доната победа</div>
-        </div>
-        <div class="download-area">
-            <button class="btn-apk" id="downloadApkBtn"><i class="fas fa-download"></i> Скачать APK</button>
-            <div class="apk-meta" style="margin-top: 8px;"><i class="fas fa-qrcode"></i> прямая ссылка / зеркало</div>
-        </div>
+    <div class="apk-section">
+        <div><h2><i class="fab fa-android"></i> GREEN RUSSIA APK <span style="background:#2c5a1f; padding:0.2rem 0.8rem; border-radius:40px;">Версия 3.2.0 | 32 MB</span></h2><p>Качай официальный клиент и становись частью криминальной вселенной.</p></div>
+        <button class="btn-apk" id="downloadApkBtn"><i class="fas fa-download"></i> Скачать APK</button>
     </div>
 
-    <!-- БЛОК ДОНАТА -->
-    <div class="donate-section">
-        <button class="btn-donate" id="donateBtn">
-            <i class="fas fa-heart"></i> Поддержать проект Green Russia
-        </button>
-        <p style="font-size:0.8rem; margin-top:8px;">Любая сумма помогает серверу жить и развиваться 💚</p>
+    <div style="text-align:center;">
+        <button class="btn-donate" id="donateBtn"><i class="fas fa-heart"></i> Поддержать проект Green Russia</button>
+    </div>
+
+    <!-- 🍏 НОВЫЙ БЛОК ДЛЯ IPHONE -->
+    <div class="ios-block">
+        <h2><i class="fab fa-apple"></i> Игра на iPhone</h2>
+        <p style="margin-bottom:15px;">APK не устанавливается напрямую на iOS, но есть простые способы поиграть на iPhone или компьютере.</p>
+        <div class="ios-grid">
+            <div class="ios-card"><i class="fas fa-mobile-alt"></i><h3>X8 Sandbox</h3><p>Эмулятор Android в App Store</p><a href="https://apps.apple.com/search?term=X8%20Sandbox" target="_blank">Скачать в App Store</a></div>
+            <div class="ios-card"><i class="fas fa-cloud-upload-alt"></i><h3>Appetize.io</h3><p>Онлайн-эмулятор в браузере</p><a href="https://appetize.io" target="_blank">Открыть сервис</a></div>
+            <div class="ios-card"><i class="fas fa-laptop-code"></i><h3>Bluestacks</h3><p>Играй на компьютере</p><a href="https://www.bluestacks.com" target="_blank">Скачать Bluestacks</a></div>
+        </div>
+        <p style="font-size:0.85rem; margin-top:10px;">📱 Инструкция: Установи X8 Sandbox → внутри открой браузер → зайди на этот сайт → скачай APK → установи и играй. Или используй Bluestacks на ПК для лучшей производительности.</p>
     </div>
 
     <div class="steps">
-        <div class="step"><div class="step-number">1</div> <strong>Скачай игру</strong><br>любым удобным способом (APK выше)</div>
-        <div class="step"><div class="step-number">2</div> <strong>Введи игровой никнейм</strong><br>твой путь начинается в Green Russia</div>
-        <div class="step"><div class="step-number">3</div> <strong>Нажми «Играть»</strong><br>и становись хозяином улиц</div>
+        <div class="step"><div class="step-number">1</div> <strong>Скачай игру</strong><br>APK выше</div>
+        <div class="step"><div class="step-number">2</div> <strong>Введи игровой никнейм</strong><br>Начни путь</div>
+        <div class="step"><div class="step-number">3</div> <strong>Нажми «Играть»</strong><br>Стань хозяином улиц</div>
     </div>
 
-    <footer>
-        <p>Green Russia — официальный сайт/форум клана. Все права защищены. Медведь — символ мощи и справедливости. <br> Играй вместе с нами | Поддержи проект через Озон Банк (СБП)</p>
-    </footer>
+    <footer>Green Russia — официальный сайт. Поддержи проект через Озон Банк (СБП).<br>flozzy6969.github.io/greenrussia | 📱 Вопросы по установке в Telegram канале</footer>
 </div>
 
 <script>
-    // ДОНАТ ССЫЛКА (твоя)
-    const donateBtn = document.getElementById('donateBtn');
-    if(donateBtn) {
-        donateBtn.addEventListener('click', () => {
-            window.open('https://finance.ozon.ru/apps/sbp/ozonbankpay/019bfe74-6fa5-7117-8665-deae385c367f', '_blank');
-        });
-    }
-
-    // СКАЧИВАНИЕ APK
-    const downloadBtn = document.getElementById('downloadApkBtn');
-    if(downloadBtn) {
-        downloadBtn.addEventListener('click', (e) => {
-            window.location.href = 'GreenRussia.apk';
-        });
-    }
+    document.getElementById('downloadApkBtn').onclick = () => location.href = 'GreenRussia.apk';
+    document.getElementById('donateBtn').onclick = () => window.open('https://finance.ozon.ru/apps/sbp/ozonbankpay/019bfe74-6fa5-7117-8665-deae385c367f', '_blank');
 </script>
 </body>
 </html>
